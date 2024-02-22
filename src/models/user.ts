@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 import uniqueValidator from 'mongoose-unique-validator';
 import { UserAttrs, UserDoc } from "./interfaces/user";
 import { Password } from "../services/password";

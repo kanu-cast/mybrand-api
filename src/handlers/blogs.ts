@@ -3,9 +3,9 @@ import { Blog } from '../models/blog';
 import { uploadFiles } from '../services/cloudinary';
 import { User } from '../models/user';
 import { dataUri } from '../services/data-uri';
-import { NotFoundError } from '../error/not-found-error';
-import { NotAuthorizedError } from '../error/not-authorized-error';
-import { BadRequestError } from '../error/bad-request-error';
+import { NotFoundError } from '../errors/not-found-error';
+import { NotAuthorizedError } from '../errors/not-authorized-error';
+import { BadRequestError } from '../errors/bad-request-error';
 
 interface Image {
     url: string;
@@ -110,11 +110,12 @@ export const handleUpdateBlog = async(req:Request, res:Response, next:NextFuncti
 export const handleLikeBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        const check = foundBlog!.likes.includes(req.userId!)
+        const check = foundBlog!.likes.includes(req.userId!);
         if(check){
-            const index = foundBlog!.likes.indexOf(req.userId!);
-            const newLikes = foundBlog!.likes.splice(index, 1);
-            foundBlog!.likes = newLikes;
+            var index = foundBlog!.likes.indexOf(req.userId!);
+            if (index >= 0) {
+                foundBlog!.likes.splice( index, 1 );
+            }
         }else{
             foundBlog!.likes.push(req.userId!);
         }

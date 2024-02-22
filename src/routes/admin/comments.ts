@@ -4,7 +4,7 @@ import { handleCreateComment, handleLikeComment, handleDislikeComment } from '..
 import { validateComment } from "../../middleware/validate-request";
 
 router.route('/create').post(validateComment, handleCreateComment);
-router.route('/:comment_id/like').post(handleLikeComment);
-router.route('/:comment_id/dislike').post(handleDislikeComment);
+router.route('/:comment_id/like').put(handleLikeComment);
+router.route('/:comment_id/dislike').put(handleDislikeComment);
 
 export { router as commentRoutes };

@@ -6,8 +6,8 @@ import { User } from '../../models/user';
 import jwt from "jsonwebtoken";
 import { UserDoc } from '../../models/interfaces/user';
 import { validateSignin, validateSignup } from '../../middleware/validate-request';
-import { NotFoundError } from '../../error/not-found-error';
-import { BadRequestError } from '../../error/bad-request-error';
+import { NotFoundError } from '../../errors/not-found-error';
+import { BadRequestError } from '../../errors/bad-request-error';
 
 const SECRET = process.env.SECRET_KEY as string;
 

@@ -1,7 +1,7 @@
 require("dotenv").config();
 import express, { Request, Response, NextFunction } from "express";
 import { Types } from "mongoose";
-import { NotAuthorizedError } from "../error/not-authorized-error";
+import { NotAuthorizedError } from "../errors/not-authorized-error";
 const jwt = require("jsonwebtoken");
 
 const SECRET = process.env.SECRET_KEY as string;
@@ -20,6 +20,17 @@ export const checkIsUserAdmin = async(req:Request, res:Response, next:NextFuncti
         const userToken = req.headers.authorization?.split(' ')[1].trim()
         const data = jwt.verify(userToken, SECRET);
         if(data.role != 'admin') throw new NotAuthorizedError();
+        req.userId = data.id;
+        req.role = data.role;
+        return next();
+    }catch(err){
+        return next({ err })
+    }
+};
+export const authorizeUser= async(req:Request, res:Response, next:NextFunction)=>{
+    try{
+        const userToken = req.headers.authorization?.split(' ')[1].trim()
+        const data = jwt.verify(userToken, SECRET);
         req.userId = data.id;
         req.role = data.role;
         return next();
