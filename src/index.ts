@@ -8,7 +8,6 @@ const passport = require('passport');
 require('../passport-config')(passport);
 
 import { authRoutes } from './routes/public/auth';
-import { signoutRoute } from './routes/admin/auth';
 import { blogPublicRoutes } from './routes/public/blogs';
 import { adminBlogRoutes } from './routes/admin/blogs';
 import { publicMessageRoutes } from './routes/public/messages';
@@ -17,8 +16,8 @@ import { commentRoutes } from './routes/admin/comments';
 
 import mongoose from "mongoose";
 import { errorHandler } from "./middleware/error-handler";
-import { NotFoundError } from "./error/not-found-error";
-import { checkIsUserAdmin } from './middleware';
+import { NotFoundError } from "./errors/not-found-error";
+import { authorizeUser, checkIsUserAdmin } from './middleware';
 
 const mongo_uri = process.env.MONGO_URI;
 mongoose.set("debug", true);
@@ -38,8 +37,7 @@ app.use(express.urlencoded({
 app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogPublicRoutes);
 app.use('/api/messages', publicMessageRoutes);
-app.use('/api/auth', passport.authenticate('jwt', { session: false }), signoutRoute);
-app.use('/api/:blog_id/comments', passport.authenticate('jwt', { session: false }), commentRoutes);
+app.use('/api/:blog_id/comments', passport.authenticate('jwt', { session: false }), authorizeUser, commentRoutes);
 app.use('/api/blogs', passport.authenticate('jwt', { session: false }), checkIsUserAdmin, adminBlogRoutes);
 app.use('/api/messages', passport.authenticate('jwt', { session: false }), checkIsUserAdmin, adminMessageRoutes);
 

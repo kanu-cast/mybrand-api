@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { Blog } from "../models/blog";
 import { Comment } from "../models/comment";
-import { NotFoundError } from "../error/not-found-error";
+import { NotFoundError } from "../errors/not-found-error";
 
 export const handleCreateComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
@@ -36,15 +36,18 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
 
         const check = comment.likes.includes(req.userId!);
         const check2 = comment.disLikes.includes(req.userId!);
-        
-        if(check2){
-            var newDislikes = comment.disLikes.filter(item => item.toString() != req.userId!.toString());
-            comment.likes = newDislikes; 
-        }else if(check){
-            const newLikes = comment.likes.filter(item => item.toString() != req.userId!.toString());
-            comment.likes = newLikes;
-        }else if(!check && !check2){
-            comment.likes.push(req.userId!);
+        if(check){
+            var index = comment!.likes.indexOf(req.userId!);
+            if (index >= 0) {
+                comment!.likes.splice(index, 1);
+            }
+        }else{
+            comment!.likes.push(req.userId!);
+        }if(check2){
+            var index = comment!.disLikes.indexOf(req.userId!);
+            if (index >= 0) {
+                comment!.disLikes.splice(index, 1);
+            }
         }
         await comment.save();
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
@@ -62,14 +65,18 @@ export const handleDislikeComment = async(req:Request, res:Response, next:NextFu
         const check = comment.disLikes.includes(req.userId!);
         const check2 = comment.likes.includes(req.userId!);
 
-        if(check2){
-            var newLikes = comment.likes.filter(item => item.toString() != req.userId!.toString());
-            comment.likes = newLikes; 
-        }else if(check){
-            var newDislikes = comment.disLikes.filter(item => item.toString() != req.userId!.toString());
-            comment.likes = newDislikes;
-        }else if(!check ){
-            comment.disLikes.push(req.userId!);
+        if(check){
+            var index = comment!.disLikes.indexOf(req.userId!);
+            if (index >= 0) {
+                comment!.disLikes.splice(index, 1);
+            }
+        }else{
+            comment!.disLikes.push(req.userId!);
+        }if(check2){
+            var index = comment!.likes.indexOf(req.userId!);
+            if (index >= 0) {
+                comment!.likes.splice(index, 1);
+            }
         }
         await comment.save();
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');

@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { Message } from "../models/message";
-import { NotAuthorizedError } from "../error/not-authorized-error";
+import { NotAuthorizedError } from "../errors/not-authorized-error";
 
 export const handleCreateMessage = async(req:Request, res:Response, next:NextFunction)=>{
     try{

@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { RequestValidationError } from '../error/request-validation-error';
+import { RequestValidationError } from '../errors/request-validation-error';
 const Joi = require('joi');
 
 // Define a validation schema for user signup
