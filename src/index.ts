@@ -19,7 +19,7 @@ const start = async ()=>{
       console.log('CONNECTED TO DATABASE')
     }catch(err){
       // internal server error
-      console.log('this is mongo error', err);
+      console.log('this is mongodb error', err);
     }
   }
 
