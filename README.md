@@ -1,4 +1,3 @@
-
 # MY BRAND REST API built with Express NodeJs Typescript and MongoDB
 
 ### A fully functional REST API written in NodeJs Express and Typescript
