@@ -48,3 +48,6 @@ npm start
 ```
 npm run test
 ```
+
+## Top technologies
+NodeJs, ExpressJs, Typescript, Mongoose, MongoDB, Swagger-Ui-Express, Jest, bcrypt, JWT, PassportJs etc.
