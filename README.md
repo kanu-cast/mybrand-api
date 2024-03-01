@@ -1,4 +1,5 @@
 [![tests](https://github.com/kanu-cast/mybrand-api/actions/workflows/tests.yml/badge.svg)](https://github.com/kanu-cast/mybrand-api/actions/workflows/tests.yml)
+
 [![codecov](https://codecov.io/github/kanu-cast/mybrand-api/graph/badge.svg?token=DH83XJ7PBN)](https://codecov.io/github/kanu-cast/mybrand-api)
 
 # MY BRAND REST API built with Express NodeJs Typescript and MongoDB
