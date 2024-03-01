@@ -2,11 +2,6 @@ name: tests
 on:
   pull_request
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: npm install && npm run test:ci
   create_env_file_job:
     runs-on: ubuntu-latest
     steps:
@@ -18,5 +13,9 @@ jobs:
         ENV_CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
         ENV_CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY }}
         ENV_CLOUD_API_SECRET: ${{ secrets.CLOUD_API_SECRET }}
-       
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install && npm run test:ci
   
