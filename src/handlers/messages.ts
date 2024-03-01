@@ -29,8 +29,6 @@ export const handleFetchSingleMessage = async(req:Request, res:Response, next:Ne
     try{
         const foundMessage = await Message.findById(req.params.message_id);
         if(!foundMessage) throw new NotFoundError();
-        console.log('are we seriously going on?!')
-        console.log('this is found Message', foundMessage);
         return res.status(200).json({ status:200, message: foundMessage, msg:'Message retrieved successfully' });
     }catch(err){
         return next({err})

@@ -49,7 +49,6 @@ export const validateSignin = async(req:Request, res:Response, next:NextFunction
 
 // validate middleware for blogs
 export const validateBlog = async(req:Request, res:Response, next:NextFunction)=>{ 
-    console.log('this is body', req.body)
     const { error, value } = blogSchema.validate(req.body);
     if (error) throw new RequestValidationError(error);
     next();

@@ -38,7 +38,6 @@ export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextF
 
 export const handleCreateBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        console.log('this is creating blog', req.userId)
         let blogImage:Partial<Image> = {};
         // handling image with cloudinary
         if("uploadedImage" in req.files!){
@@ -76,8 +75,6 @@ export const handleCreateBlog = async(req:Request, res:Response, next:NextFuncti
 
 export const handleUpdateBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        console.log('this is updating blog', req.userId, req.params.blog_id)
-
         const foundBlog = await Blog.findById(req.params.blog_id);
         if(!foundBlog) throw new NotFoundError();
         if(foundBlog.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
