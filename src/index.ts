@@ -22,7 +22,7 @@ const start = async ()=>{
     }
   }
 
-app.listen(3000, () =>{
+app.listen(port, () =>{
     console.log(`LISTENING ON PORT ${port}`);
 });
 
