@@ -13,9 +13,10 @@ router.post('/create', upload.fields([
     validateBlog,
     handleCreateBlog
 );
-router.put('/:blog_id/update', validateBlog, upload.fields([
+router.put('/:blog_id/update', upload.fields([
         { name:"uploadedImage", maxCount:1 }
     ]),
+    validateBlog,
     handleUpdateBlog
 );
 router.route('/:blog_id/delete').put(handleDeleteBlog);
