@@ -1,18 +1,16 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import { app } from '../app';
-import request from 'supertest';
 
 let mongo:any;
 jest.setTimeout(60000);
 
-declare global {
-    namespace NodeJS {
-        interface Global {
-            signin(): string;
-        }
-    }
-};
+// declare global {
+//     namespace NodeJS {
+//         interface Global {
+//             signin(): string;
+//         }
+//     }
+// };
  
 // befor running all tests first create new mongodb instance
 beforeAll(async ()=>{

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1709265069792" clover="3.2.0">
-  <project timestamp="1709265069792" name="All files">
-    <metrics statements="425" coveredstatements="378" conditionals="57" coveredconditionals="33" methods="71" coveredmethods="60" elements="553" coveredelements="471" complexity="0" loc="425" ncloc="425" packages="8" files="25" classes="25"/>
+<coverage generated="1709284325042" clover="3.2.0">
+  <project timestamp="1709284325042" name="All files">
+    <metrics statements="428" coveredstatements="381" conditionals="57" coveredconditionals="33" methods="71" coveredmethods="60" elements="556" coveredelements="474" complexity="0" loc="428" ncloc="428" packages="8" files="25" classes="25"/>
     <package name="src">
-      <metrics statements="47" coveredstatements="28" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="50" coveredstatements="31" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="app.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\app.ts">
-        <metrics statements="29" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="32" coveredstatements="31" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="6" type="stmt"/>
         <line num="2" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
@@ -21,20 +21,23 @@
         <line num="17" count="6" type="stmt"/>
         <line num="18" count="6" type="stmt"/>
         <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
         <line num="21" count="6" type="stmt"/>
-        <line num="24" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
         <line num="25" count="6" type="stmt"/>
         <line num="26" count="6" type="stmt"/>
-        <line num="30" count="6" type="stmt"/>
-        <line num="31" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
         <line num="32" count="6" type="stmt"/>
         <line num="33" count="6" type="stmt"/>
         <line num="34" count="6" type="stmt"/>
         <line num="35" count="6" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
         <line num="37" count="6" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="40" count="6" type="stmt"/>
+        <line num="39" count="6" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
         <line num="42" count="6" type="stmt"/>
+        <line num="44" count="6" type="stmt"/>
       </file>
       <file name="index.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\index.ts">
         <metrics statements="18" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>

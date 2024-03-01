@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import 'express-async-errors';
 
 import dotenv from "dotenv";
@@ -17,10 +17,12 @@ import { commentRoutes } from './routes/admin/comments';
 import { errorHandler } from "./middleware/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
 import { authorizeUser, checkIsUserAdmin } from './middleware';
+import swaggerUI from 'swagger-ui-express';
+import documentation from './swagger.json';
 
 const app = express();
 
-
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(documentation));
 app.use(passport.initialize()); 
 app.use(express.json());
 app.use(express.urlencoded({

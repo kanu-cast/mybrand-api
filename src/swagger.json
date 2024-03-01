@@ -1,0 +1,664 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Brand API Doc",
+        "version": "1.0.0",
+        "description": "This is an api to my portfolio"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/api/auth/signup": {
+          "post": {
+            "tags": [
+              "sign up"
+            ],
+            "summary": "Lets new users create new accounts",
+            "description": "create new account",
+            "requestBody":{
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type":"object",
+                    "properties": {
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "firstName": "kanuma",
+                      "lastName": "castro",
+                      "email": "kanumacastro@gmail.com",
+                      "password":"pass123"
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Created account successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "password": {
+                            "type": "string"
+                          },
+                          "suspended": {
+                            "type": "boolean"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          }
+                        },
+                        "example": {
+                            "_id": "xcdcdjnvjv9090-njnd",
+                            "firstName": "kanuma",
+                            "lastName": "castro",
+                            "role":"admin",
+                            "blogs": [],
+                            "email": "kanuma@castro.com",
+                            "password":"vdsjbjvsdvjbjvjbvj",
+                            "suspended": false,
+                            "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Email is already registered under another user"
+              }
+            }
+          }
+        },
+        "/api/auth/signin": {
+          "post": {
+            "tags": [
+              "sign in"
+            ],
+            "summary": "Lets users log into their accounts",
+            "description": "log into account",
+            "requestBody":{
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type":"object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "email": "kanumacastro@gmail.com",
+                      "password":"pass123"
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Successfully logged you in",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "password": {
+                            "type": "string"
+                          },
+                          "suspended": {
+                            "type": "boolean"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          }
+                        },
+                        "example": {
+                            "_id": "xcdcdjnvjv9090-njnd",
+                            "firstName": "kanuma",
+                            "lastName": "castro",
+                            "role":"admin",
+                            "blogs": [],
+                            "email": "kanuma@castro.com",
+                            "password":"vdsjbjvsdvjbjvjbvj",
+                            "suspended": false,
+                            "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid Email/Password combination"
+              }
+            }
+          }
+        },
+        "/api/blogs/create": {
+          "post": {
+            "tags": ["Create Blog"],
+            "summary": "Create and stores a new Blog in database",
+            "description": "create new blog",
+            "requestBody": {
+              "required": true,
+              "content": {
+                "multipart/form-data": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "title": { "type": "string" },
+                      "body": { "type": "string" },
+                      "uploadedImage": { "type": "string", "format": "binary" }
+                      
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Blog created succesfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          },
+                          "imageObj": {
+                            "type": "object"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          },
+                          "comments": {
+                            "type": "array"
+                          },
+                          "likes": {
+                            "type": "array"
+                          },
+                          "published":{
+                            "type": "string"
+                          }
+                        },
+                      "example": {
+                          "_id": "xcdcdjnvjv9090-njnd",
+                          "title": "This is a blog",
+                          "body": "lorem ipsum dolor sit amet",
+                          "imageObj":{
+                            "public_id": "blogImages/voxlh8su7gllpywaffmo",
+                            "width": 600,
+                            "height": 337,
+                            "format": "webp",
+                            "url": "http://res.cloudinary.com/dmems8p0a/image/upload/waffmo.webp",
+                            "secure_url": "https://res.cloudinary.com/dmems8p0a/image/upload/affmo.webp"
+                          },
+                          "likes": [],
+                          "comments": [],
+                          "published":"365756757787",
+                          "archived":false,
+                          "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid Inputs"
+              },
+              "401": {
+                "description": "Not authorized"
+              }
+            }
+          }
+        },
+        "/api/blogs/:blog_id/update": {
+          "post": {
+            "tags": ["Update Blog"],
+            "summary": "Update specific Blog",
+            "description": "Update blog",
+            "parameters":[
+              {
+                "name": "id",
+                "in": "path",
+                "description": "Blog Id",
+                "required": "true",
+                "schema": { "type": "string" }
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "multipart/form-data": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "title": { "type": "string" },
+                      "body": { "type": "string" },
+                      "uploadedImage": { "type": "string", "format": "binary" }
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Blog created succesfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          },
+                          "imageObj": {
+                            "type": "object"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          },
+                          "comments": {
+                            "type": "array"
+                          },
+                          "likes": {
+                            "type": "array"
+                          },
+                          "published":{
+                            "type": "string"
+                          }
+                        },
+                      "example": {
+                          "_id": "xcdcdjnvjv9090-njnd",
+                          "title": "This is a blog",
+                          "body": "lorem ipsum dolor sit amet",
+                          "imageObj":{
+                            "public_id": "blogImages/voxlh8su7gllpywaffmo",
+                            "width": 600,
+                            "height": 337,
+                            "format": "webp",
+                            "url": "http://res.cloudinary.com/dmems8p0a/image/upload/waffmo.webp",
+                            "secure_url": "https://res.cloudinary.com/dmems8p0a/image/upload/affmo.webp"
+                          },
+                          "likes": [],
+                          "comments": [],
+                          "published":"365756757787",
+                          "archived":false,
+                          "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid Inputs"
+              },
+              "401": {
+                "description": "Not authorized"
+              }
+            }
+          }
+        },
+        "/api/blogs/:blog_id/like": {
+          "post": {
+            "tags": ["Like a blog"],
+            "summary": "Update user reactions",
+            "description": "Update user reaction on blog",
+            "parameters":[
+              {
+                "name": "blog_id",
+                "in": "path",
+                "description": "blog_id",
+                "required": "true",
+                "schema": { "type": "string" }
+              }
+            ],
+            
+            "responses": {
+              "200": {
+                "description": "Blog created succesfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          },
+                          "imageObj": {
+                            "type": "object"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          },
+                          "comments": {
+                            "type": "array"
+                          },
+                          "likes": {
+                            "type": "array"
+                          },
+                          "published":{
+                            "type": "string"
+                          }
+                        },
+                      "example": {
+                          "_id": "xcdcdjnvjv9090-njnd",
+                          "title": "This is a blog",
+                          "body": "lorem ipsum dolor sit amet",
+                          "imageObj":{
+                            "public_id": "blogImages/voxlh8su7gllpywaffmo",
+                            "width": 600,
+                            "height": 337,
+                            "format": "webp",
+                            "url": "http://res.cloudinary.com/dmems8p0a/image/upload/waffmo.webp",
+                            "secure_url": "https://res.cloudinary.com/dmems8p0a/image/upload/affmo.webp"
+                          },
+                          "likes": [],
+                          "comments": [],
+                          "published":"365756757787",
+                          "archived":false,
+                          "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found"
+              }
+            }
+          }
+        },
+        "/api/blogs/read/all": {
+          "get": {
+            "tags": ["Read Blogs"],
+            "summary": "Retrieves all Blogs from database",
+            "description": "Fetch all blogs",
+            "responses": {
+              "200": {
+                "description": "Retrieved blogs successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          },
+                          "imageObj": {
+                            "type": "object"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          },
+                          "comments": {
+                            "type": "array"
+                          },
+                          "likes": {
+                            "type": "array"
+                          },
+                          "published":{
+                            "type": "string"
+                          }
+                        },
+                      "example": {
+                          "_id": "xcdcdjnvjv9090-njnd",
+                          "title": "This is a blog",
+                          "body": "lorem ipsum dolor sit amet",
+                          "imageObj":{
+                            "public_id": "blogImages/voxlh8su7gllpywaffmo",
+                            "width": 600,
+                            "height": 337,
+                            "format": "webp",
+                            "url": "http://res.cloudinary.com/dmems8p0a/image/upload/waffmo.webp",
+                            "secure_url": "https://res.cloudinary.com/dmems8p0a/image/upload/affmo.webp"
+                          },
+                          "likes": [],
+                          "comments": [],
+                          "published":"365756757787",
+                          "archived":false,
+                          "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server Error"
+              }
+            }
+          }
+        },
+        "/api/blogs/:blog_id/read": {
+          "post": {
+            "tags": ["Fetch single Blog"],
+            "summary": "Fetch one blog from db",
+            "description": "Get request returns specified blog by id",
+            "parameters":[
+              {
+                "name": "blog_id",
+                "in": "path",
+                "description": "blog_id",
+                "required": "true",
+                "schema": { "type": "string" }
+              }
+            ],
+            
+            "responses": {
+              "200": {
+                "description": "Blog retrieved succesfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          },
+                          "imageObj": {
+                            "type": "object"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          },
+                          "comments": {
+                            "type": "array"
+                          },
+                          "likes": {
+                            "type": "array"
+                          },
+                          "published":{
+                            "type": "string"
+                          }
+                        },
+                      "example": {
+                          "_id": "xcdcdjnvjv9090-njnd",
+                          "title": "This is a blog",
+                          "body": "lorem ipsum dolor sit amet",
+                          "imageObj":{
+                            "public_id": "blogImages/voxlh8su7gllpywaffmo",
+                            "width": 600,
+                            "height": 337,
+                            "format": "webp",
+                            "url": "http://res.cloudinary.com/dmems8p0a/image/upload/waffmo.webp",
+                            "secure_url": "https://res.cloudinary.com/dmems8p0a/image/upload/affmo.webp"
+                          },
+                          "likes": [],
+                          "comments": [],
+                          "published":"365756757787",
+                          "archived":false,
+                          "deleted":false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found"
+              },
+              "400":{
+                "description":"Bad request"
+              }
+            }
+          }
+        },
+        "/api/messages/create": {
+          "post": {
+            "tags": ["send message"],
+            "summary": "Lets users send messages to admin",
+            "description": "Send message",
+            "requestBody":{
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type":"object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "email": "kanumacastro@gmail.com",
+                      "body":"lorem ipsum dolor sit amet"
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Message sent successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                            "_id": "xcdcdjnvjv9090-njnd",
+                            "email": "kanuma@castro.com",
+                            "body": "message"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid Email"
+              }
+            }
+          }
+        }
+    }
+
+}

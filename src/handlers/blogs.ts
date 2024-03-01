@@ -133,7 +133,7 @@ export const handleDeleteBlog = async(req:Request, res:Response, next:NextFuncti
         if(foundBlog!.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
         foundBlog!.deleted = true;
         await foundBlog!.save();
-        return res.status(200).json({ status:200, blog:foundBlog, msg:'Blog deleted successfully' });
+        return res.status(204).json({ status:204, msg:'Blog deleted successfully' });
     }catch(err){
         return next({err});
     }
