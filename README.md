@@ -1,4 +1,3 @@
-[![codecov](https://codecov.io/github/kanu-cast/mybrand-api/graph/badge.svg?token=DH83XJ7PBN)](https://codecov.io/github/kanu-cast/mybrand-api)
 
 # MY BRAND REST API built with Express NodeJs Typescript and MongoDB
 
