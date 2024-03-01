@@ -163,9 +163,9 @@ describe('Blogs', ()=>{
         expect(blog.body.blog._id).toBeDefined();
 
         await request(app)
-        .put(`/api/blogs/${blog.body.blog._id}/delete`)
+        .delete(`/api/blogs/${blog.body.blog._id}/delete`)
         .set('Authorization', `Bearer ${response.body.token}`)
-        .expect(200)
+        .expect(204)
 
         const allBlogs = await request(app)
         .get('/api/blogs/read/all').expect(200);
@@ -210,7 +210,7 @@ describe('Blogs', ()=>{
         expect(wrongUser.body.token).toBeDefined();
 
         await request(app)
-        .put(`/api/blogs/${blog.body.blog._id}/delete`)
+        .delete(`/api/blogs/${blog.body.blog._id}/delete`)
         .set('Authorization', `Bearer ${wrongUser.body.token}`)
         .expect(400)
 

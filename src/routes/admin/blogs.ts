@@ -19,7 +19,7 @@ router.put('/:blog_id/update', upload.fields([
     validateBlog,
     handleUpdateBlog
 );
-router.route('/:blog_id/delete').put(handleDeleteBlog);
+router.route('/:blog_id/delete').delete(handleDeleteBlog);
 router.route('/:blog_id/like').put(handleLikeBlog);
 
 export { router as adminBlogRoutes };
