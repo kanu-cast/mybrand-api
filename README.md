@@ -26,7 +26,7 @@ After that, you will have to replace the mongoURL with your MongoDB address in *
 ## Clone this repository
 
 ```
-git clone git@github.com:dalenguyen/rest-api-node-typescript.git .
+https://github.com/kanu-cast/mybrand-api.git .
 ```
 
 Then install the dependencies
@@ -40,5 +40,11 @@ npm install
 Run in development mode
 
 ```
-npm run dev
+npm start
+```
+
+## Automated Testing with jest (locally)
+
+```
+npm run test
 ```
