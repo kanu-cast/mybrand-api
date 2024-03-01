@@ -7,6 +7,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 const start = async ()=>{
+  console.log('starting....')
     if(!process.env.SECRET_KEY){
         throw new Error('JWT env must be created')
     }
