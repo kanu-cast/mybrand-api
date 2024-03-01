@@ -38,14 +38,14 @@ export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextF
 
 export const handleCreateBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        if(req.role !=='admin') throw new NotAuthorizedError();
+        console.log('this is creating blog', req.userId)
         let blogImage:Partial<Image> = {};
         // handling image with cloudinary
         if("uploadedImage" in req.files!){
             const uploadedBlogImage = req.files.uploadedImage[0];
             const base64image = dataUri(uploadedBlogImage);
             const cloudImg = await uploadFiles( base64image.content, { folder:"blogImages"}, function(err, result){
-                if(err){ console.log(err); return res.json(err);} console.log(result); return result;
+                if(err){ return res.json(err);} return result;
             });
             blogImage.url = cloudImg.url;
             blogImage.public_id = cloudImg.public_id;
@@ -76,9 +76,11 @@ export const handleCreateBlog = async(req:Request, res:Response, next:NextFuncti
 
 export const handleUpdateBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        if(req.role !=='admin') throw new NotAuthorizedError();
+        console.log('this is updating blog', req.userId, req.params.blog_id)
+
         const foundBlog = await Blog.findById(req.params.blog_id);
-        if(foundBlog!.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
+        if(!foundBlog) throw new NotFoundError();
+        if(foundBlog.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
         let blogImage:Partial<Image> = foundBlog!.imageObj;
         // handling image with cloudinary
         if("uploadedImage" in req.files!){
@@ -110,6 +112,7 @@ export const handleUpdateBlog = async(req:Request, res:Response, next:NextFuncti
 export const handleLikeBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
+        if(!foundBlog) throw new NotFoundError();
         const check = foundBlog!.likes.includes(req.userId!);
         if(check){
             var index = foundBlog!.likes.indexOf(req.userId!);
@@ -128,8 +131,8 @@ export const handleLikeBlog = async(req:Request, res:Response, next:NextFunction
 
 export const handleDeleteBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        if(req.role !=='admin') throw new NotAuthorizedError();
         const foundBlog = await Blog.findById(req.params.blog_id);
+        if(!foundBlog) throw new NotFoundError();
         if(foundBlog!.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
         foundBlog!.deleted = true;
         await foundBlog!.save();

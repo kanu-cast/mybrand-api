@@ -6,7 +6,6 @@ import { User } from '../../models/user';
 import jwt from "jsonwebtoken";
 import { UserDoc } from '../../models/interfaces/user';
 import { validateSignin, validateSignup } from '../../middleware/validate-request';
-import { NotFoundError } from '../../errors/not-found-error';
 import { BadRequestError } from '../../errors/bad-request-error';
 
 const SECRET = process.env.SECRET_KEY as string;
@@ -35,20 +34,20 @@ router.post('/signup', validateSignup,
                 },
                 SECRET!
             );
-            return res.status(200).json({ msg:'Created account successfully', token});
+            return res.status(201).json({ msg:'Created account successfully', user:createdUser, token});
         }
     }catch(err){
         return next({ err });
     }
-});
+}); 
 router.post('/signin', validateSignin, 
 async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundUser = await User.find({
             email: req.body.email
         });
+        if(!foundUser.length) throw new BadRequestError('Invalid Email/Password combination')
         const user = foundUser[0];
-        if(!user) throw new BadRequestError('invalid email/password combination')
         const { id, email, firstName, lastName, role } = user;
         let isMatch = await user.comparePassword(req.body.password);
         if(!isMatch) throw new BadRequestError('Invalid Email/Password combination');
@@ -63,7 +62,7 @@ async(req:Request, res:Response, next:NextFunction)=>{
             },
             SECRET
         );
-        res.status(200).json({ msg:'Successfully logged you in', token });
+        res.status(200).json({ msg:'Successfully logged you in', user, token });
     }catch(err){
         return next({ err });
     }

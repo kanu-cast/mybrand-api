@@ -33,20 +33,19 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
     try{
         const comment = await Comment.findById(req.params.comment_id);
         if(!comment) throw new NotFoundError();
-
         const check = comment.likes.includes(req.userId!);
         const check2 = comment.disLikes.includes(req.userId!);
         if(check){
-            var index = comment!.likes.indexOf(req.userId!);
+            var index = comment.likes.indexOf(req.userId!);
             if (index >= 0) {
                 comment!.likes.splice(index, 1);
             }
         }else{
-            comment!.likes.push(req.userId!);
+            comment.likes.push(req.userId!);
         }if(check2){
-            var index = comment!.disLikes.indexOf(req.userId!);
+            var index = comment.disLikes.indexOf(req.userId!);
             if (index >= 0) {
-                comment!.disLikes.splice(index, 1);
+                comment.disLikes.splice(index, 1);
             }
         }
         await comment.save();

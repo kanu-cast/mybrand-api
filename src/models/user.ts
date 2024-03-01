@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import uniqueValidator from 'mongoose-unique-validator';
 import { UserAttrs, UserDoc } from "./interfaces/user";
-import { Password } from "../services/password";
 import { NextFunction } from "express";
+import bcrypt from 'bcrypt';
 
 interface UserModel extends mongoose.Model<UserDoc> {
     build(attrs: UserAttrs): UserDoc;
@@ -51,18 +51,22 @@ const userSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 // Schema hooks
-userSchema.pre("save", async function(done){
-    if(this.isModified('password')){
-        const hashed = await Password.toHash(this.get('password')!);
-        this.set('password', hashed);
+userSchema.pre("save", async function(next){
+    try{
+        if(!this.isModified("password")){
+            return next();
+        }
+        let hashedPassword = await bcrypt.hash(this.password, 10);
+        this.password = hashedPassword;
+    }catch(err:any){
+        return next(err);
     }
-    done();
 });
 
 // Schema methods
-userSchema.methods.comparePassword = async function(candidatePassword:string, next:NextFunction) {
+userSchema.methods.comparePassword = async function(candidatePassword, next) {
     try {
-      let isMatch = await Password.compare(candidatePassword, this.password);
+      let isMatch = await bcrypt.compare(candidatePassword, this.password);
       return isMatch;
     } catch (err) {
         console.log(err);
@@ -70,7 +74,7 @@ userSchema.methods.comparePassword = async function(candidatePassword:string, ne
     }
 };
 
-userSchema.plugin(uniqueValidator,{message:"email is already registered under another user"});
+userSchema.plugin(uniqueValidator,{message:"Email is already registered under another user"});
 userSchema.statics.build = (attrs: UserAttrs)=>{
     return new User(attrs);
 };
