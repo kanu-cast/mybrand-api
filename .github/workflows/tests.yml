@@ -7,4 +7,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install && npm run test:ci
+  create_env_file_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create .env file
+      uses: ozaytsev86/create-env-file@v1
+      with:
+        ENV_MONGO_URI: ${{ secrets.MONGO_URI }}
+        ENV_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        ENV_CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+        ENV_CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY }}
+        ENV_CLOUD_API_SECRET: ${{ secrets.CLOUD_API_SECRET }}
+       
   
