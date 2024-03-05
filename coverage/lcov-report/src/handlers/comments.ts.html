@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.32% </span>
+                <span class="strong">81.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>49/61</span>
+                <span class='fraction'>50/61</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.69% </span>
+                <span class="strong">84.61% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>43/52</span>
+                <span class='fraction'>44/52</span>
             </div>
         
             
@@ -150,11 +150,19 @@
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -163,24 +171,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -207,7 +207,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -238,14 +238,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express, { Request, Response, NextFunction } from "express";
 import { Blog } from "../models/blog";
 import { Comment } from "../models/comment";
-import { NotFoundError } from "../errors/not-found-error";
+import { NotFoundError } from '../errors/not-found-error';
 &nbsp;
 export const handleCreateComment = async(req:Request, res:Response, next:NextFunction)=&gt;{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!foundBlog) <span class="cstat-no" title="statement not covered" >throw new NotFoundError();</span>
-        const newComment = await Comment.create({
-            author: req.userId,
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!foundBlog) <span class="cstat-no" title="statement not covered" >throw new NotFoundError("Blog Not Found");</span>
+        const newComment = Comment.build({
+            author: req.userId!,
             body: req.body.body,
             blog: foundBlog._id
         });
@@ -262,14 +262,14 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
         });
         return res.status(201).json({ status:201, blog:updatedBlog, msg:'Created comment successfully' });
     }catch(err){
-<span class="cstat-no" title="statement not covered" >        return next({err});</span>
+        return next({err});
     }
 };
 &nbsp;
 export const handleLikeComment = async(req:Request, res:Response, next:NextFunction)=&gt;{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >throw new NotFoundError();</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >throw new NotFoundError("Comment Not Found");</span>
         const check = comment.likes.includes(req.userId!);
         const check2 = comment.disLikes.includes(req.userId!);
         <span class="missing-if-branch" title="if path not taken" >I</span>if(check){
@@ -296,7 +296,7 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
 export const handleDislikeComment = async(req:Request, res:Response, next:NextFunction)=&gt;{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >throw new NotFoundError();</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >throw new NotFoundError("Comment Not Found");</span>
 &nbsp;
         const check = comment.disLikes.includes(req.userId!);
         const check2 = comment.likes.includes(req.userId!);
@@ -328,7 +328,7 @@ export const handleDislikeComment = async(req:Request, res:Response, next:NextFu
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-01T09:12:04.820Z
+                at 2024-03-05T13:03:07.810Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

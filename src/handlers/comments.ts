@@ -1,14 +1,14 @@
 import express, { Request, Response, NextFunction } from "express";
 import { Blog } from "../models/blog";
 import { Comment } from "../models/comment";
-import { NotFoundError } from "../errors/not-found-error";
+import { NotFoundError } from '../errors/not-found-error';
 
 export const handleCreateComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        if(!foundBlog) throw new NotFoundError();
-        const newComment = await Comment.create({
-            author: req.userId,
+        if(!foundBlog) throw new NotFoundError("Blog Not Found");
+        const newComment = Comment.build({
+            author: req.userId!,
             body: req.body.body,
             blog: foundBlog._id
         });
@@ -32,7 +32,7 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
 export const handleLikeComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        if(!comment) throw new NotFoundError();
+        if(!comment) throw new NotFoundError("Comment Not Found");
         const check = comment.likes.includes(req.userId!);
         const check2 = comment.disLikes.includes(req.userId!);
         if(check){
@@ -59,7 +59,7 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
 export const handleDislikeComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        if(!comment) throw new NotFoundError();
+        if(!comment) throw new NotFoundError("Comment Not Found");
 
         const check = comment.disLikes.includes(req.userId!);
         const check2 = comment.likes.includes(req.userId!);

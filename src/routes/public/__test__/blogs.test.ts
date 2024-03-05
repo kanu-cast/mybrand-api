@@ -24,7 +24,7 @@ describe('blogs unprotected routes', ()=>{
         .expect(201);
         
         await request(app)
-        .get('/api/blogs/read/all')
+        .get('/api/blogs/')
         .expect(200);
     })
     it('should return 200 with single blog', async()=>{
@@ -54,7 +54,7 @@ describe('blogs unprotected routes', ()=>{
 
     it('should return 400 if blog not found', async()=>{
         request(app)
-        .get('/api/blogs/65de45932d129d8e7ebf8eb2/read')
+        .get('/api/blogs/12345567890/read')
         .expect(400);
     })
 })

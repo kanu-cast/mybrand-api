@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import uniqueValidator from 'mongoose-unique-validator';
 import { UserAttrs, UserDoc } from "./interfaces/user";
-import { NextFunction } from "express";
 import bcrypt from 'bcrypt';
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -24,7 +23,7 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type:String,
-        require:true
+        required:true
     },
     role:{
         type: String,
@@ -51,7 +50,9 @@ const userSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 // Schema hooks
-userSchema.pre("save", async function(next){
+userSchema.pre("save", userPreSaveFunction)
+
+export async function userPreSaveFunction (this: any, next){
     try{
         if(!this.isModified("password")){
             return next();
@@ -61,21 +62,21 @@ userSchema.pre("save", async function(next){
     }catch(err:any){
         return next(err);
     }
-});
+}
+
 
 // Schema methods
-userSchema.methods.comparePassword = async function(candidatePassword, next) {
+export const compareFunction = userSchema.methods.comparePassword = async function(candidatePassword, next) {
     try {
       let isMatch = await bcrypt.compare(candidatePassword, this.password);
       return isMatch;
     } catch (err) {
-        console.log(err);
       return next(err);
     }
 };
 
 userSchema.plugin(uniqueValidator,{message:"Email is already registered under another user"});
-userSchema.statics.build = (attrs: UserAttrs)=>{
+export const userBuildFunction = userSchema.statics.build = (attrs: UserAttrs)=>{
     return new User(attrs);
 };
 

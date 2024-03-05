@@ -22,7 +22,7 @@ describe('Messages', ()=>{
         .expect(201);
 
         return request(app)
-        .get('/api/messages/read/all')
+        .get('/api/messages/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .expect(200);
     });
@@ -103,11 +103,28 @@ describe('Messages', ()=>{
         .expect(200);
         
         const allMessages = await request(app)
-        .get('/api/messages/read/all')
+        .get('/api/messages/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .expect(200);
 
         expect(allMessages.body.messages.length).toEqual(0);
 
     });
+    it('should not delete if message_id is invalid', async()=>{
+        const response = await request(app)
+        .post('/api/auth/signup')
+        .send({
+            firstName:"kanu",
+            lastName: 'castro',
+            email: 'test@test.com',
+            password: 'pass123'
+        })
+        .expect(201);
+        expect(response.body.token).toBeDefined()
+
+        await request(app)
+        .put(`/api/messages/1234567890/delete`)
+        .set('Authorization', `Bearer ${response.body.token}`)
+        .expect(400);
+    })
 });

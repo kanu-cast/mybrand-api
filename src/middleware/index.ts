@@ -1,7 +1,9 @@
 require("dotenv").config();
 import express, { Request, Response, NextFunction } from "express";
 import { Types } from "mongoose";
-import { NotAuthorizedError } from "../errors/not-authorized-error";
+import { BadRequestError } from '../errors/bad-request-error'
+import { NotAuthorizedError } from "../errors/not-authorized-error"
+
 const jwt = require("jsonwebtoken");
 const passport = require('passport');
 require('../../passport-config')(passport);
@@ -17,11 +19,12 @@ declare global {
     }
 }
 
-export const checkIsUserAdmin = async(req:Request, res:Response, next:NextFunction)=>{
+export async function checkIsUserAdmin(req:Request, res:Response, next:NextFunction){
     try{
         const userToken = req.headers.authorization?.split(' ')[1].trim();
+        if(!userToken) throw new BadRequestError('Invalid/Expired token')
         const data = jwt.verify(userToken, SECRET);
-        if(data.role != 'admin') throw new NotAuthorizedError();
+        if(data.role != 'admin') throw new NotAuthorizedError("You are Not authorized");
         req.userId = data.id;
         req.role = data.role;
         return next();
@@ -29,10 +32,12 @@ export const checkIsUserAdmin = async(req:Request, res:Response, next:NextFuncti
         return next({ err })
     }
 };
-export const authorizeUser= async(req:Request, res:Response, next:NextFunction)=>{
+export async function authorizeUser(req:Request, res:Response, next:NextFunction){
     try{
         const userToken = req.headers.authorization?.split(' ')[1].trim()
+        if(!userToken) throw new BadRequestError('Invalid/Expired token')
         const data = jwt.verify(userToken, SECRET);
+        if(!data) throw new NotAuthorizedError("You are not authorized")
         req.userId = data.id;
         req.role = data.role;
         return next();

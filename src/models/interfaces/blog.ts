@@ -6,6 +6,8 @@ export interface BlogAttrs {
     title: string;
     body: string;
     imageObj: {};
+    author:Types.ObjectId;
+
 };
 
 // this interface describes the properties a blog Document has

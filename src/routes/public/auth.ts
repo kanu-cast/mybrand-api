@@ -50,7 +50,10 @@ async(req:Request, res:Response, next:NextFunction)=>{
         const user = foundUser[0];
         const { id, email, firstName, lastName, role } = user;
         let isMatch = await user.comparePassword(req.body.password);
-        if(!isMatch) throw new BadRequestError('Invalid Email/Password combination');
+        if(!isMatch){
+            const newError =  new BadRequestError('Invalid Email/Password combination', "password");
+            throw newError;
+        }
         let token = jwt.sign(
             {
                 exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, //30days

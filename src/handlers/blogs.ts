@@ -3,10 +3,10 @@ import { Blog } from '../models/blog';
 import { uploadFiles } from '../services/cloudinary';
 import { User } from '../models/user';
 import { dataUri } from '../services/data-uri';
+
+import { BadRequestError} from '../errors/bad-request-error';
 import { NotFoundError } from '../errors/not-found-error';
 import { NotAuthorizedError } from '../errors/not-authorized-error';
-import { BadRequestError } from '../errors/bad-request-error';
-
 interface Image {
     url: string;
     public_id: string;
@@ -18,7 +18,7 @@ interface Image {
 }
 export const handleFetchAllBlogs = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        const allBlogs = await Blog.find({deleted: false});
+        const allBlogs = await Blog.find({ deleted: false });
         return res.status(200).json({ status:200, blogs:allBlogs, msg:'Retrieved blogs successfully' });
     }catch(err){
         return next({err});
@@ -29,7 +29,7 @@ export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextF
     try{
         const filter = { _id: req.params.blog_id, deleted:false};
         const blog = await Blog.find(filter).populate('comments','author likes dislikes body createdAt updatedAt');
-        if(!blog.length) throw new NotFoundError();
+        if(!blog.length) throw new NotFoundError('Blog Not Found'); 
         return res.status(200).json({ status:200, blog, msg:'Retrieved Blog successfully' });
     }catch(err){
         return next({err});
@@ -39,6 +39,7 @@ export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextF
 export const handleCreateBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         let blogImage:Partial<Image> = {};
+        if(!req.files) throw new BadRequestError('Please add Image for Blog');
         // handling image with cloudinary
         if("uploadedImage" in req.files!){
             const uploadedBlogImage = req.files.uploadedImage[0];
@@ -53,14 +54,12 @@ export const handleCreateBlog = async(req:Request, res:Response, next:NextFuncti
             blogImage.format = cloudImg.format;
             blogImage.bytes = cloudImg.bytes;
             blogImage.type = cloudImg.resource_type;
-        }else{
-            throw new BadRequestError('Please add Image for Blog')
         }
         const { title, body} = req.body;
-        const newBlog = await Blog.create({
+        const newBlog = Blog.build({
            title,
            body,
-           author: req.userId,
+           author: req.userId!,
            imageObj:blogImage
         });
         await newBlog.save();
@@ -75,16 +74,26 @@ export const handleCreateBlog = async(req:Request, res:Response, next:NextFuncti
 
 export const handleUpdateBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
+        if(!req.files){
+            const newError = new BadRequestError('Please add Image for Blog'); 
+            throw newError;
+        }
         const foundBlog = await Blog.findById(req.params.blog_id);
-        if(!foundBlog) throw new NotFoundError();
-        if(foundBlog.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
+        if(!foundBlog){
+            const newError = new NotFoundError('Blog Not Found'); 
+            throw newError;
+        }
+        if(foundBlog.author.toString() !== req.userId!.toString()){
+            const newError = new NotAuthorizedError('You are not Authorized'); 
+            throw newError;
+        }
         let blogImage:Partial<Image> = foundBlog!.imageObj;
         // handling image with cloudinary
         if("uploadedImage" in req.files!){
             const uploadedBlogImage = req.files.uploadedImage[0];
             const base64image = dataUri(uploadedBlogImage);
             const cloudImg = await uploadFiles( base64image.content, { folder:"blogImages"}, function(err, result){
-                if(err){ console.log(err); return res.json(err);} console.log(result); return result;
+                if(err){  return res.json(err);} return result;
             });
             blogImage.url = cloudImg.url;
             blogImage.public_id = cloudImg.public_id;
@@ -109,7 +118,7 @@ export const handleUpdateBlog = async(req:Request, res:Response, next:NextFuncti
 export const handleLikeBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        if(!foundBlog) throw new NotFoundError();
+        if(!foundBlog) throw new NotFoundError('Blog Not Found');
         const check = foundBlog!.likes.includes(req.userId!);
         if(check){
             var index = foundBlog!.likes.indexOf(req.userId!);
@@ -129,8 +138,8 @@ export const handleLikeBlog = async(req:Request, res:Response, next:NextFunction
 export const handleDeleteBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        if(!foundBlog) throw new NotFoundError();
-        if(foundBlog!.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError();
+        if(!foundBlog) throw new NotFoundError("Blog Not Found");
+        if(foundBlog!.author.toString() !== req.userId!.toString()) throw new NotAuthorizedError("You're Not Authorized");
         foundBlog!.deleted = true;
         await foundBlog!.save();
         return res.status(204).json({ status:204, msg:'Blog deleted successfully' });

@@ -4,9 +4,9 @@ import { Type } from 'typescript';
 // This interface describes all properties a comment should have
 
 export interface CommentAttrs {
-    author:string;
-    body: string
-
+    author:Types.ObjectId;
+    body: string;
+    blog:Types.ObjectId;
 };
 
 // this interface describes the properties a comment Document has
@@ -25,4 +25,6 @@ export interface CommentDoc extends Document {
     deleted:boolean;
     createdAt:string;
     updatedAt:string;
+    author:Types.ObjectId;
+
 };
