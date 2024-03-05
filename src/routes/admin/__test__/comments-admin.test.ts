@@ -32,7 +32,7 @@ describe('comments on blogs', ()=>{
         .expect(201)
         
         await request(app)
-        .get('/api/blogs/read/all')
+        .get('/api/blogs/')
         .expect(200);
     });
     it('should return 200 on user likes comment', async()=>{
@@ -69,7 +69,7 @@ describe('comments on blogs', ()=>{
         .expect(200);
 
         await request(app)
-        .get('/api/blogs/read/all')
+        .get('/api/blogs/')
         .expect(200);
 
 
@@ -108,7 +108,7 @@ describe('comments on blogs', ()=>{
         .expect(200)
 
         await request(app)
-        .get('/api/blogs/read/all')
+        .get('/api/blogs/')
         .expect(200);
 
 
@@ -169,7 +169,7 @@ describe('comments on blogs', ()=>{
         expect(reDislike.body.comments[0].likes.length).toEqual(0);
 
         await request(app)
-        .get('/api/blogs/read/all')
+        .get('/api/blogs/')
         .expect(200);
 
     });
@@ -198,6 +198,26 @@ describe('comments on blogs', ()=>{
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"l"
+        })
+        .expect(400)
+    })
+
+    it('should return 400 if blog is not found', async()=>{
+        const response = await request(app)
+        .post('/api/auth/signup')
+        .send({
+            firstName:"kanu",
+            lastName: 'castro',
+            email: 'test@test.com',
+            password: 'pass123'
+        })
+        .expect(201);
+        
+        await request(app)
+        .post(`/api/1234567890/comments/create`)
+        .set('Authorization', `Bearer ${response.body.token}`)
+        .send({
+            body:"lorem ipsum dolor sit amet"
         })
         .expect(400)
     })

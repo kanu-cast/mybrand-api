@@ -41,7 +41,7 @@ const blogSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-blogSchema.statics.build = (attrs: BlogAttrs)=>{
+export const blogBuildFunction = blogSchema.statics.build = (attrs: BlogAttrs)=>{
     return new Blog(attrs);
 };
 const Blog = mongoose.model<BlogDoc, BlogModel>("Blog", blogSchema);

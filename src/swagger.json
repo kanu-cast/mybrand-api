@@ -10,6 +10,15 @@
             "url": "http://localhost:3000"
         }
     ],
+    "components": {
+      "securitySchemes": {
+        "Bearer": {
+          "type": "apiKey",
+          "name":"Authorization",
+          "in": "header"
+        }
+      }
+    },
     "paths": {
         "/api/auth/signup": {
           "post": {
@@ -188,6 +197,11 @@
             "tags": ["Create Blog"],
             "summary": "Create and stores a new Blog in database",
             "description": "create new blog",
+            "security": [
+              { 
+                "Bearer": []
+              }
+            ],
             "requestBody": {
               "required": true,
               "content": {
@@ -272,7 +286,7 @@
           }
         },
         "/api/blogs/:blog_id/update": {
-          "post": {
+          "put": {
             "tags": ["Update Blog"],
             "summary": "Update specific Blog",
             "description": "Update blog",
@@ -283,6 +297,13 @@
                 "description": "Blog Id",
                 "required": "true",
                 "schema": { "type": "string" }
+              },
+              {
+                "name": "Authorization",
+                "in": "header",
+                "description": "Jason Web Token",
+                "required": "true",
+                "schema": { "type": "apiKey"}
               }
             ],
             "requestBody": {
@@ -301,7 +322,7 @@
               }
             },
             "responses": {
-              "201": {
+              "200":{
                 "description": "Blog created succesfully",
                 "content": {
                   "application/json": {
@@ -446,7 +467,7 @@
             }
           }
         },
-        "/api/blogs/read/all": {
+        "/api/blogs/": {
           "get": {
             "tags": ["Read Blogs"],
             "summary": "Retrieves all Blogs from database",

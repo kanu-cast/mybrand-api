@@ -28,7 +28,7 @@ const commentSchema = new mongoose.Schema({
     ]
 }, {timestamps: true});
 
-commentSchema.statics.build = (attrs: CommentAttrs)=>{
+export const commentBuildFunction = commentSchema.statics.build = (attrs: CommentAttrs)=>{
     return new Comment(attrs);
 };
 const Comment= mongoose.model<CommentDoc, CommentModel>("Comment", commentSchema);

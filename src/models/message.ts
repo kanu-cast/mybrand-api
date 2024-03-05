@@ -20,7 +20,7 @@ const messageSchema = new mongoose.Schema({
     }
 }, {timestamps:true})
 
-messageSchema.statics.build = (attrs: MessageAttrs)=>{
+export const messageBuildFunction = messageSchema.statics.build = (attrs: MessageAttrs)=>{
     return new Message(attrs);
 };
 const Message = mongoose.model<MessageDoc, MessageModel>("Message", messageSchema);

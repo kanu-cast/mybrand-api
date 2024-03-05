@@ -1,9 +1,16 @@
 import request from 'supertest';
 import { app } from '../../../app';
+import mongoose  from 'mongoose';
+
+const jwt = require("jsonwebtoken");
+const SECRET = process.env.SECRET_KEY as string;
 
 const testImage = `${__dirname}/../../../../assets/coder.jpg`;
 const updateImage = `${__dirname}/../../../../assets/coding.webp`;
+const token = new mongoose.Types.ObjectId();
+
 describe('Blogs', ()=>{
+    
     it('creates new blog successfully if user is logged in', async()=>{
         const response = await request(app)
         .post('/api/auth/signup')
@@ -168,7 +175,7 @@ describe('Blogs', ()=>{
         .expect(204)
 
         const allBlogs = await request(app)
-        .get('/api/blogs/read/all').expect(200);
+        .get('/api/blogs/').expect(200);
 
         expect(allBlogs.body.blogs.length).toEqual(0);
     })
@@ -215,7 +222,7 @@ describe('Blogs', ()=>{
         .expect(400)
 
         const allBlogs = await request(app)
-        .get('/api/blogs/read/all').expect(200);
+        .get('/api/blogs/').expect(200);
 
         expect(allBlogs.body.blogs.length).toEqual(1);
     })
