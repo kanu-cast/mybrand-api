@@ -1,16 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { CustomError } from '../errors/custom-error';
-// Error handling middleware
-export const errorHandler = (
-    err: any,
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    if ('statusCode' in err){
-      return res.status(err.statusCode).send({ errors: err.serializeErrors() });
-    }else{
-      // console.error(err)
-      res.status(400).send({ errors: [{ message: 'Something went wrong' }] });
-    }
-  };
+
+export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  // console.log('this is erroHandler', err);
+  if (res.headersSent) {
+    return next(err);
+  }
+  if (err instanceof CustomError) {
+    res.status(err.statusCode).json({ error: err.message });
+  } else {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}

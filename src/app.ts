@@ -15,13 +15,17 @@ import { adminMessageRoutes } from './routes/admin/messages';
 import { commentRoutes } from './routes/admin/comments';
 import { errorHandler } from './middleware/error-handler';
 import { NotFoundError } from './errors/not-found-error';
-
+import cors from 'cors';
 import { authorizeUser, checkIsUserAdmin } from './middleware';
 import swaggerUI from 'swagger-ui-express';
 import documentation from './swagger.json';
 
 const app = express();
-
+app.use(cors({
+    origin:"*",
+    methods:["GET", "POST", "PUT"],
+    credentials:true
+}));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(documentation));
 app.use(passport.initialize()); 
 app.use(express.json());

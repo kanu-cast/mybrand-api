@@ -15,7 +15,7 @@ describe('blogs unprotected routes', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -39,7 +39,7 @@ describe('blogs unprotected routes', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -48,13 +48,13 @@ describe('blogs unprotected routes', ()=>{
         .expect(201);
         
         await request(app)
-        .get(`/api/blogs/${blog.body.blog._id}/read`)
+        .get(`/api/blogs/${blog.body.blog._id}/`)
         .expect(200);
     })
 
     it('should return 400 if blog not found', async()=>{
         request(app)
-        .get('/api/blogs/12345567890/read')
+        .get('/api/blogs/65de45932d129d8e7ebf8eb2/')
         .expect(400);
     })
 })

@@ -3,6 +3,6 @@ const router  = express.Router({mergeParams: true});
 import { handleFetchAllBlogs, handleFetchSingleBlog } from '../../handlers/blogs';
 
 router.route('/').get(handleFetchAllBlogs);
-router.route('/:blog_id/read').get(handleFetchSingleBlog);
+router.route('/:blog_id').get(handleFetchSingleBlog);
 
 export { router as blogPublicRoutes };

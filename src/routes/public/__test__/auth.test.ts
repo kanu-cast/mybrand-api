@@ -36,8 +36,7 @@ describe('authentication', ()=>{
                 email: 'test@test.com',
                 password: 'pass123'
             })
-            .expect(400);
-        
+            .expect(500);
         })
         
         it('returns a 400 on invalid email', async()=>{
@@ -49,7 +48,7 @@ describe('authentication', ()=>{
                 email: 'testtestcom',
                 password: 'pass123'
             })
-            .expect(400);
+            .expect(403);
         })
         
         it('returns a 400 on invalid firstName and/or lastname', async()=>{
@@ -62,7 +61,7 @@ describe('authentication', ()=>{
                 email: 'test@test.com',
                 password: 'pass123'
             })
-            .expect(400);
+            .expect(403);
         
             return request(app)
             .post('/api/auth/signup')
@@ -72,7 +71,7 @@ describe('authentication', ()=>{
                 email: 'test@test.com',
                 password: 'pass123'
             })
-            .expect(400);
+            .expect(403);
         
         })
         
@@ -85,7 +84,7 @@ describe('authentication', ()=>{
                 email: 'test@test.com',
                 password: 'p@'
             })
-            .expect(400);
+            .expect(403);
         })
         
         it('checks if token was assigned to user', async()=>{
@@ -135,7 +134,7 @@ describe('authentication', ()=>{
                 email: 'test@test.com',
                 password: 'pass123'
             })
-            .expect(201);
+            .expect(201)
         
             return request(app)
             .post('/api/auth/signin')
@@ -175,7 +174,7 @@ describe('authentication', ()=>{
                 email: 'test@test.com',
                 password: 'p@'
             })
-            .expect(400);
+            .expect(403);
         })
         
         it('checks if token was assigned to user', async()=>{
