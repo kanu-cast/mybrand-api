@@ -43,7 +43,7 @@ export const validateSignup = async(req:Request, res:Response, next:NextFunction
 // validate middleware for signin
 export const validateSignin = async(req:Request, res:Response, next:NextFunction)=>{ 
     const { error, value } = signinSchema.validate(req.body);
-    if (error)  return next(new RequestValidationError('Email/Message Validation Failed'));
+    if (error)  return next(new RequestValidationError('Email/Password validation failed'));
     next();
 };
 
