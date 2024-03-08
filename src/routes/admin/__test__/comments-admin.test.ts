@@ -15,7 +15,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -24,7 +24,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
         
         await request(app)
-        .post(`/api/${blog.body.blog._id}/comments/create`)
+        .post(`/api/${blog.body.blog._id}/comments/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"lorem ipsum"
@@ -47,7 +47,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -56,7 +56,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
         
         const comment = await request(app)
-        .post(`/api/${blog.body.blog._id}/comments/create`)
+        .post(`/api/${blog.body.blog._id}/comments/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"lorem ipsum"
@@ -86,7 +86,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -95,7 +95,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
         
         const comment = await request(app)
-        .post(`/api/${blog.body.blog._id}/comments/create`)
+        .post(`/api/${blog.body.blog._id}/comments/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"lorem ipsum"
@@ -125,7 +125,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -134,7 +134,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
         
         const comment = await request(app)
-        .post(`/api/${blog.body.blog._id}/comments/create`)
+        .post(`/api/${blog.body.blog._id}/comments/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"lorem ipsum"
@@ -173,7 +173,7 @@ describe('comments on blogs', ()=>{
         .expect(200);
 
     });
-    it('should return 400 if comment validation fails', async()=>{
+    it('should return 403 if comment validation fails', async()=>{
         const response = await request(app)
         .post('/api/auth/signup')
         .send({
@@ -185,7 +185,7 @@ describe('comments on blogs', ()=>{
         .expect(201);
       
         const blog = await request(app)
-        .post('/api/blogs/create')
+        .post('/api/blogs/')
         .set('Authorization', `Bearer ${response.body.token}`)
         .set('contentType', 'application/octet-stream')
         .field('title', 'lorem ipsum')
@@ -194,12 +194,12 @@ describe('comments on blogs', ()=>{
         .expect(201);
         
         await request(app)
-        .post(`/api/${blog.body.blog._id}/comments/create`)
+        .post(`/api/${blog.body.blog._id}/comments/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"l"
         })
-        .expect(400)
+        .expect(403);
     })
 
     it('should return 400 if blog is not found', async()=>{
@@ -214,11 +214,11 @@ describe('comments on blogs', ()=>{
         .expect(201);
         
         await request(app)
-        .post(`/api/1234567890/comments/create`)
+        .post(`/api/65de45932d129d8e7ebf8eb2/comments/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .send({
             body:"lorem ipsum dolor sit amet"
         })
-        .expect(400)
+        .expect(404)
     })
 })

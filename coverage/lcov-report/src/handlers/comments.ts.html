@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">46.15% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/13</span>
+                <span class='fraction'>7/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.61% </span>
+                <span class="strong">82.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/52</span>
+                <span class='fraction'>43/52</span>
             </div>
         
             
@@ -149,7 +149,8 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -157,26 +158,27 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,7 +245,7 @@ import { NotFoundError } from '../errors/not-found-error';
 export const handleCreateComment = async(req:Request, res:Response, next:NextFunction)=&gt;{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!foundBlog) <span class="cstat-no" title="statement not covered" >throw new NotFoundError("Blog Not Found");</span>
+        if(!foundBlog) return next(new NotFoundError("Blog Not Found"));
         const newComment = Comment.build({
             author: req.userId!,
             body: req.body.body,
@@ -252,7 +254,8 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
         await newComment.save();
         foundBlog.comments.push(newComment._id);
         await foundBlog.save();
-        const updatedBlog = await Blog.findById(foundBlog._id).populate({
+        const updatedBlog = await Blog.findById(foundBlog._id)
+        .populate({
             path: 'comments',
             select:'body',
             populate:{
@@ -262,14 +265,14 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
         });
         return res.status(201).json({ status:201, blog:updatedBlog, msg:'Created comment successfully' });
     }catch(err){
-        return next({err});
+<span class="cstat-no" title="statement not covered" >        return next(err);</span>
     }
 };
 &nbsp;
 export const handleLikeComment = async(req:Request, res:Response, next:NextFunction)=&gt;{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >throw new NotFoundError("Comment Not Found");</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >return next(new NotFoundError("Comment Not Found"));</span>
         const check = comment.likes.includes(req.userId!);
         const check2 = comment.disLikes.includes(req.userId!);
         <span class="missing-if-branch" title="if path not taken" >I</span>if(check){
@@ -289,14 +292,14 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
         return res.status(200).json({ status:200, comments: allComments, msg:'Reaction added successfully' });
     }catch(err){
-<span class="cstat-no" title="statement not covered" >        return next({err});</span>
+<span class="cstat-no" title="statement not covered" >        return next(err);</span>
     }
 };
 &nbsp;
 export const handleDislikeComment = async(req:Request, res:Response, next:NextFunction)=&gt;{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >throw new NotFoundError("Comment Not Found");</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!comment) <span class="cstat-no" title="statement not covered" >return  next( new NotFoundError("Comment Not Found"));</span>
 &nbsp;
         const check = comment.disLikes.includes(req.userId!);
         const check2 = comment.likes.includes(req.userId!);
@@ -318,7 +321,7 @@ export const handleDislikeComment = async(req:Request, res:Response, next:NextFu
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
         return res.status(200).json({ status:200, comments:allComments, msg:'Reaction added successfully' });
     }catch(err){
-<span class="cstat-no" title="statement not covered" >        return next({err});</span>
+<span class="cstat-no" title="statement not covered" >        return next(err)</span>
     }
 };
 &nbsp;</pre></td></tr></table></pre>
@@ -328,7 +331,7 @@ export const handleDislikeComment = async(req:Request, res:Response, next:NextFu
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-05T13:03:07.810Z
+                at 2024-03-08T09:53:14.229Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

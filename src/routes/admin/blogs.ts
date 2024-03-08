@@ -7,19 +7,19 @@ const storage = multer.memoryStorage();
 const upload = multer({
     storage:storage
 });
-router.post('/create', upload.fields([
+router.post('/', upload.fields([
         { name:"uploadedImage", maxCount:1 }
     ]),
     validateBlog,
     handleCreateBlog
 );
-router.put('/:blog_id/update', upload.fields([
+router.put('/:blog_id', upload.fields([
         { name:"uploadedImage", maxCount:1 }
     ]),
     validateBlog,
     handleUpdateBlog
 );
-router.route('/:blog_id/delete').delete(handleDeleteBlog);
+router.route('/:blog_id').delete(handleDeleteBlog);
 router.route('/:blog_id/like').put(handleLikeBlog);
 
 export { router as adminBlogRoutes };

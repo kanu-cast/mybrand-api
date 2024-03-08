@@ -4,7 +4,7 @@ import { app } from '../../../app';
 describe('Messages', ()=>{
     it('should return 201 on successfull message sent', async()=>{
         await request(app)
-        .post('/api/messages/create')
+        .post('/api/messages/')
         .send({
             email: 'test@testing.com',
             body:"lorem ipsum dolor"
@@ -28,7 +28,7 @@ describe('Messages', ()=>{
     });
     it('should return 200 on successfull message retrieval', async()=>{
         const message = await request(app)
-        .post('/api/messages/create')
+        .post('/api/messages/')
         .send({
             email: 'test@testing.com',
             body:"lorem ipsum dolor"
@@ -47,14 +47,14 @@ describe('Messages', ()=>{
         expect(message.body.message._id).toBeDefined();
 
         return request(app)
-        .get(`/api/messages/${message.body.message._id}/read`)
+        .get(`/api/messages/${message.body.message._id}/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .expect(200);
     });
 
     it('should return 400 on unsuccessfull message retrieval', async()=>{
         await request(app)
-        .post('/api/messages/create')
+        .post('/api/messages/')
         .send({
             email: 'test@testing.com',
             body:"lorem ipsum dolor"
@@ -73,14 +73,14 @@ describe('Messages', ()=>{
         expect(response.body.token).toBeDefined();
 
         return request(app)
-        .get(`/api/messages/65de45932d129d8e7ebf8eb2/read`)
+        .get(`/api/messages/65de45932d129d8e7ebf8eb2/`)
         .set('Authorization', `Bearer ${response.body.token}`)
-        .expect(400);
+        .expect(404);
     });
     it('should return 200 on successfull message deletion', async()=>{
         
         const message = await request(app)
-        .post('/api/messages/create')
+        .post('/api/messages/')
         .send({
             email: 'test@testing.com',
             body:"lorem ipsum dolor"
@@ -98,7 +98,7 @@ describe('Messages', ()=>{
         .expect(201);
         expect(message.body.message._id).toBeDefined();
         await request(app)
-        .put(`/api/messages/${message.body.message._id}/delete`)
+        .delete(`/api/messages/${message.body.message._id}/`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .expect(200);
         
@@ -123,8 +123,8 @@ describe('Messages', ()=>{
         expect(response.body.token).toBeDefined()
 
         await request(app)
-        .put(`/api/messages/1234567890/delete`)
+        .delete(`/api/messages/65de45932d129d8e7ebf8eb2/`)
         .set('Authorization', `Bearer ${response.body.token}`)
-        .expect(400);
+        .expect(404);
     })
 });

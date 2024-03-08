@@ -36,34 +36,34 @@ const signinSchema = Joi.object({
 // validate middleware for signup
 export const validateSignup = async(req:Request, res:Response, next:NextFunction)=>{ 
     const { error, value } = signupSchema.validate(req.body);
-    if (error) throw new RequestValidationError(error);
+    if (error)  return next(new RequestValidationError(error));
     next();
 };
 
 // validate middleware for signin
 export const validateSignin = async(req:Request, res:Response, next:NextFunction)=>{ 
     const { error, value } = signinSchema.validate(req.body);
-    if (error) throw new RequestValidationError(error);
+    if (error)  return next(new RequestValidationError('Email/Message Validation Failed'));
     next();
 };
 
 // validate middleware for blogs
 export const validateBlog = async(req:Request, res:Response, next:NextFunction)=>{ 
     const { error, value } = blogSchema.validate(req.body);
-    if (error) throw new RequestValidationError(error);
+    if (error)  return next(new RequestValidationError(error));
     next();
 };
 
 // validate middleware for comment
 export const validateComment = async(req:Request, res:Response, next:NextFunction)=>{ 
     const { error, value } = commentSchema.validate(req.body);
-    if (error) throw new RequestValidationError(error);
+    if (error)  return next(new RequestValidationError(error));
     next();
 };
 
 // validate middleware for message
 export const validateMessage = async(req:Request, res:Response, next:NextFunction)=>{ 
     const { error, value } = messageSchema.validate(req.body);
-    if (error) throw new RequestValidationError(error);
+    if (error)  return next(new RequestValidationError('Email/Message Validation Failed'));
     next();
 };

@@ -6,7 +6,7 @@ import { NotFoundError } from '../errors/not-found-error';
 export const handleCreateComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const foundBlog = await Blog.findById(req.params.blog_id);
-        if(!foundBlog) throw new NotFoundError("Blog Not Found");
+        if(!foundBlog) return next(new NotFoundError("Blog Not Found"));
         const newComment = Comment.build({
             author: req.userId!,
             body: req.body.body,
@@ -15,7 +15,8 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
         await newComment.save();
         foundBlog.comments.push(newComment._id);
         await foundBlog.save();
-        const updatedBlog = await Blog.findById(foundBlog._id).populate({
+        const updatedBlog = await Blog.findById(foundBlog._id)
+        .populate({
             path: 'comments',
             select:'body',
             populate:{
@@ -25,14 +26,14 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
         });
         return res.status(201).json({ status:201, blog:updatedBlog, msg:'Created comment successfully' });
     }catch(err){
-        return next({err});
+        return next(err);
     }
 };
 
 export const handleLikeComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        if(!comment) throw new NotFoundError("Comment Not Found");
+        if(!comment) return next(new NotFoundError("Comment Not Found"));
         const check = comment.likes.includes(req.userId!);
         const check2 = comment.disLikes.includes(req.userId!);
         if(check){
@@ -52,14 +53,14 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
         return res.status(200).json({ status:200, comments: allComments, msg:'Reaction added successfully' });
     }catch(err){
-        return next({err});
+        return next(err);
     }
 };
 
 export const handleDislikeComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
         const comment = await Comment.findById(req.params.comment_id);
-        if(!comment) throw new NotFoundError("Comment Not Found");
+        if(!comment) return  next( new NotFoundError("Comment Not Found"));
 
         const check = comment.disLikes.includes(req.userId!);
         const check2 = comment.likes.includes(req.userId!);
@@ -81,6 +82,6 @@ export const handleDislikeComment = async(req:Request, res:Response, next:NextFu
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
         return res.status(200).json({ status:200, comments:allComments, msg:'Reaction added successfully' });
     }catch(err){
-        return next({err});
+        return next(err)
     }
 };

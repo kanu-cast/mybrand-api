@@ -22,9 +22,9 @@ declare global {
 export async function checkIsUserAdmin(req:Request, res:Response, next:NextFunction){
     try{
         const userToken = req.headers.authorization?.split(' ')[1].trim();
-        if(!userToken) throw new BadRequestError('Invalid/Expired token')
+        if(!userToken) return next(new BadRequestError('Invalid/Expired token'));
         const data = jwt.verify(userToken, SECRET);
-        if(data.role != 'admin') throw new NotAuthorizedError("You are Not authorized");
+        if(data.role != 'admin') return next(new NotAuthorizedError("You are Not authorized"));
         req.userId = data.id;
         req.role = data.role;
         return next();
@@ -35,9 +35,9 @@ export async function checkIsUserAdmin(req:Request, res:Response, next:NextFunct
 export async function authorizeUser(req:Request, res:Response, next:NextFunction){
     try{
         const userToken = req.headers.authorization?.split(' ')[1].trim()
-        if(!userToken) throw new BadRequestError('Invalid/Expired token')
+        if(!userToken) return next(new BadRequestError('Invalid/Expired token'));
         const data = jwt.verify(userToken, SECRET);
-        if(!data) throw new NotAuthorizedError("You are not authorized")
+        if(!data) return next(new NotAuthorizedError("You are not authorized"));
         req.userId = data.id;
         req.role = data.role;
         return next();

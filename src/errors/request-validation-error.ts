@@ -1,7 +1,7 @@
 import { CustomError } from './custom-error';
 
 export class RequestValidationError extends CustomError {
-    statusCode = 400;
+    statusCode = 403;
   
     constructor(public message: string, public field?: string) {
       super(message);
