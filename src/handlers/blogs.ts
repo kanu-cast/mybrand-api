@@ -90,7 +90,7 @@ export const handleUpdateBlog = async(req:Request, res:Response, next:NextFuncti
         const foundBlog = await Blog.findById(req.params.blog_id);
         if(!foundBlog) return next( new NotFoundError('Blog Not Found')); 
         if(foundBlog.author.toString() !== req.userId!.toString()) next( new NotAuthorizedError('You are not Authorized')); 
-        let blogImage:Partial<Image> = foundBlog!.imageObj;
+        let blogImage ={};
         // handling image with cloudinary
         if("uploadedImage" in req.files!){
             const uploadedBlogImage = req.files.uploadedImage[0];
@@ -98,23 +98,23 @@ export const handleUpdateBlog = async(req:Request, res:Response, next:NextFuncti
             const cloudImg = await uploadFiles( base64image.content, { folder:"blogImages"}, function(err, result){
                 if(err){  return res.json(err);} return result;
             });
-            blogImage.url = cloudImg.url;
-            blogImage.public_id = cloudImg.public_id;
-            blogImage.width = cloudImg.width;
-            blogImage.height = cloudImg.height;
-            blogImage.format = cloudImg.format;
-            blogImage.bytes = cloudImg.bytes;
-            blogImage.type = cloudImg.resource_type;
+            blogImage['url'] = cloudImg.url;
+            blogImage['public_id'] = cloudImg.public_id;
+            blogImage['width'] = cloudImg.width;
+            blogImage['height'] = cloudImg.height;
+            blogImage['format'] = cloudImg.format;
+            blogImage['bytes'] = cloudImg.bytes;
+            blogImage['type'] = cloudImg.resource_type;
+            //updating blog
+            const { title, body } = req.body;
+            foundBlog.title = title;
+            foundBlog.body = body;
+            foundBlog.imageObj = blogImage;
+            await foundBlog.save();
+            return res.status(200).json({ status:200, blog:foundBlog, msg:'Blog updated Successfully' });
         }else{
             return next(new RequestValidationError('Please add Image for Blog'));
         }
-        //updating blog
-        const { title, body } = req.body;
-        foundBlog!.title = title;
-        foundBlog!.body = body;
-        foundBlog!.imageObj = blogImage;
-        await foundBlog!.save();
-        return res.status(200).json({ status:200, blog:foundBlog, msg:'Blog updated Successfully' });
     }catch(err){
         return next({err});
     }
