@@ -106,15 +106,13 @@ export const handleUpdateBlog = async(req:Request, res:Response, next:NextFuncti
             blogImage['bytes'] = cloudImg.bytes;
             blogImage['type'] = cloudImg.resource_type;
             //updating blog
-            const { title, body } = req.body;
-            foundBlog.title = title;
-            foundBlog.body = body;
             foundBlog.imageObj = blogImage;
-            await foundBlog.save();
-            return res.status(200).json({ status:200, blog:foundBlog, msg:'Blog updated Successfully' });
-        }else{
-            return next(new RequestValidationError('Please add Image for Blog'));
         }
+        const { title, body } = req.body;
+        foundBlog.title = title;
+        foundBlog.body = body;
+        await foundBlog.save();
+        return res.status(200).json({ status:200, blog:foundBlog, msg:'Blog updated Successfully' });
     }catch(err){
         return next({err});
     }

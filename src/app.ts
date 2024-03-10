@@ -23,7 +23,7 @@ import documentation from './swagger.json';
 const app = express();
 app.use(cors({
     origin:"*",
-    methods:["GET", "POST", "PUT"],
+    methods:["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials:true
 }));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(documentation));
