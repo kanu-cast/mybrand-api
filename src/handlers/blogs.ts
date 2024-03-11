@@ -34,7 +34,7 @@ export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextF
         .populate('author','firstName lastName')
         .populate({
             path: 'comments',
-            select:'body',
+            select:'body likes disLikes',
             populate:{
                 path:'author',
                 select:'firstName lastName'
