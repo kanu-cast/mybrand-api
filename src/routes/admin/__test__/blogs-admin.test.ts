@@ -137,13 +137,13 @@ describe('Blogs', ()=>{
         .put(`/api/blogs/${blog.body.blog._id}/like`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .expect(200)
-        expect(like.body.blog.likes.length).toEqual(1);
+        expect(like.body.likes.length).toEqual(1);
 
         const reLike = await request(app)
         .put(`/api/blogs/${blog.body.blog._id}/like`)
         .set('Authorization', `Bearer ${response.body.token}`)
         .expect(200)
-        expect(reLike.body.blog.likes.length).toEqual(0);
+        expect(reLike.body.likes.length).toEqual(0);
 
     })
 

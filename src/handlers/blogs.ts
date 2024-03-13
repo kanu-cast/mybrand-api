@@ -132,7 +132,8 @@ export const handleLikeBlog = async(req:Request, res:Response, next:NextFunction
             foundBlog!.likes.push(req.userId!);
         }
         await foundBlog!.save();
-        return res.status(200).json({ status:200, blog:foundBlog, msg:'Blog Updated successfully' });
+        const newLikes = foundBlog!.likes;
+        return res.status(200).json({ status:200, likes:newLikes, msg:'Reaction added successfully' });
     }catch(err){
         return next({err});
     }

@@ -51,7 +51,7 @@ export const handleLikeComment = async(req:Request, res:Response, next:NextFunct
         }
         await comment.save();
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
-        return res.status(200).json({ status:200, comments: allComments, msg:'Reaction added successfully' });
+        return res.status(200).json({ status:200, comments: allComments, commentLikes:comment.likes, commentDislikes:comment.disLikes, msg:'Reaction added successfully' });
     }catch(err){
         return next(err);
     }
@@ -80,7 +80,7 @@ export const handleDislikeComment = async(req:Request, res:Response, next:NextFu
         }
         await comment.save();
         const allComments = await Comment.find({ blog: comment.blog }).populate('author','firstName lastName');
-        return res.status(200).json({ status:200, comments:allComments, msg:'Reaction added successfully' });
+        return res.status(200).json({ status:200, comments:allComments, commentLikes:comment.likes, commentDislikes:comment.disLikes, msg:'Reaction added successfully' });
     }catch(err){
         return next(err)
     }

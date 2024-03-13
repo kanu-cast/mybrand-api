@@ -100,7 +100,7 @@ describe('Messages', ()=>{
         await request(app)
         .delete(`/api/messages/${message.body.message._id}/`)
         .set('Authorization', `Bearer ${response.body.token}`)
-        .expect(200);
+        .expect(204);
         
         const allMessages = await request(app)
         .get('/api/messages/')

@@ -35,6 +35,7 @@ export async function checkIsUserAdmin(req:Request, res:Response, next:NextFunct
 export async function authorizeUser(req:Request, res:Response, next:NextFunction){
     try{
         const userToken = req.headers.authorization?.split(' ')[1].trim()
+        console.log('this is userToken', req.headers.authorization);
         if(!userToken) return next(new BadRequestError('Invalid/Expired token'));
         const data = jwt.verify(userToken, SECRET);
         if(!data) return next(new NotAuthorizedError("You are not authorized"));

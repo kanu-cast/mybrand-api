@@ -43,7 +43,7 @@ export const handleDeleteMessage = async(req:Request, res:Response, next:NextFun
         if(!foundMessage) next( new NotFoundError('Message Not Found'));
         foundMessage!.deleted = true;
         await foundMessage!.save()
-        return res.status(200).json({status:200, msg:'Message deleted successfully' })
+        return res.status(204).json({status:204, msg:'Message deleted successfully' })
     }catch(err){
         return next(err);
     }
