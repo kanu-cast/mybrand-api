@@ -8,6 +8,7 @@ const passport = require('passport');
 require('../passport-config')(passport);
 
 import { authRoutes } from './routes/public/auth';
+import { usersAdminRoutes } from './routes/admin/auth';
 import { blogPublicRoutes } from './routes/public/blogs';
 import { adminBlogRoutes } from './routes/admin/blogs';
 import { publicMessageRoutes } from './routes/public/messages';
@@ -37,6 +38,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogPublicRoutes);
 app.use('/api/messages', publicMessageRoutes);
 app.use('/api/:blog_id/comments', authorizeUser, passport.authenticate('jwt', { session: false }), commentRoutes);
+app.use('/api/users/', passport.authenticate('jwt', { session: false }), checkIsUserAdmin, usersAdminRoutes);
 app.use('/api/blogs', passport.authenticate('jwt', { session: false }), checkIsUserAdmin, adminBlogRoutes);
 app.use('/api/messages', passport.authenticate('jwt', { session: false }), checkIsUserAdmin, adminMessageRoutes);
 
