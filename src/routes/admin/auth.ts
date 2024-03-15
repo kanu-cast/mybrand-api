@@ -3,7 +3,6 @@ const router  = express.Router({mergeParams: true});
 
 import { User } from '../../models/user';
 import {  NotFoundError } from "../../errors/not-found-error";
-import { NotAuthorizedError } from "../../errors/not-authorized-error";
 
 router.get('/',
 async(req:Request, res:Response, next:NextFunction)=>{

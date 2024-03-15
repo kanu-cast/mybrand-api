@@ -1,10 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Blog } from '../models/blog';
 import { uploadFiles } from '../services/cloudinary';
 import { User } from '../models/user';
 import { dataUri } from '../services/data-uri';
 
-import { BadRequestError} from '../errors/bad-request-error';
 import { NotFoundError } from '../errors/not-found-error';
 import { NotAuthorizedError } from '../errors/not-authorized-error';
 import { RequestValidationError } from '../errors/request-validation-error';
@@ -28,7 +27,6 @@ export const handleFetchAllBlogs = async(req:Request, res:Response, next:NextFun
 
 export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        console.log('fetching single blog');
         const filter = { _id: req.params.blog_id, deleted:false};
         const blog = await Blog.find(filter)
         .populate('author','firstName lastName')

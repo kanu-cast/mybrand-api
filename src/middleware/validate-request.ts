@@ -13,7 +13,7 @@ const signupSchema = Joi.object({
 // Define a validation schema for blogs
 const blogSchema = Joi.object({
     title:Joi.string().min(3).max(300).required(),
-    body:Joi.string().min(3).max(3000).required()
+    body:Joi.string().min(3).max(10000).required()
 });
 
 // Define a validation schema for messages
