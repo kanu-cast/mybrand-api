@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1710308258680" clover="3.2.0">
-  <project timestamp="1710308258680" name="All files">
-    <metrics statements="458" coveredstatements="417" conditionals="60" coveredconditionals="34" methods="68" coveredmethods="61" elements="586" coveredelements="512" complexity="0" loc="458" ncloc="458" packages="8" files="26" classes="26"/>
+<coverage generated="1710455167762" clover="3.2.0">
+  <project timestamp="1710455167763" name="All files">
+    <metrics statements="459" coveredstatements="371" conditionals="64" coveredconditionals="27" methods="70" coveredmethods="53" elements="593" coveredelements="451" complexity="0" loc="459" ncloc="459" packages="8" files="26" classes="26"/>
     <package name="src">
       <metrics statements="54" coveredstatements="36" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="1"/>
       <file name="app.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\app.ts">
@@ -66,7 +66,7 @@
       </file>
     </package>
     <package name="src.errors">
-      <metrics statements="32" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="5"/>
+      <metrics statements="32" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="4"/>
       <file name="bad-request-error.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\errors\bad-request-error.ts">
         <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="8" type="stmt"/>
@@ -80,18 +80,18 @@
       <file name="custom-error.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\errors\custom-error.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="8" type="stmt"/>
-        <line num="4" count="18" type="stmt"/>
-        <line num="5" count="18" type="stmt"/>
-        <line num="7" count="18" type="stmt"/>
+        <line num="4" count="15" type="stmt"/>
+        <line num="5" count="15" type="stmt"/>
+        <line num="7" count="15" type="stmt"/>
       </file>
       <file name="not-authorized-error.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\errors\not-authorized-error.ts">
-        <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
       </file>
       <file name="not-found-error.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\errors\not-found-error.ts">
@@ -108,164 +108,164 @@
         <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
-        <line num="4" count="10" type="stmt"/>
-        <line num="6" count="10" type="stmt"/>
-        <line num="7" count="10" type="stmt"/>
-        <line num="8" count="10" type="stmt"/>
+        <line num="4" count="9" type="stmt"/>
+        <line num="6" count="9" type="stmt"/>
+        <line num="7" count="9" type="stmt"/>
+        <line num="8" count="9" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.handlers">
-      <metrics statements="176" coveredstatements="161" conditionals="31" coveredconditionals="17" methods="28" coveredmethods="28"/>
+      <metrics statements="176" coveredstatements="118" conditionals="33" coveredconditionals="8" methods="29" coveredmethods="20"/>
       <file name="blogs.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\handlers\blogs.ts">
-        <metrics statements="93" coveredstatements="89" conditionals="14" coveredconditionals="8" methods="14" coveredmethods="14"/>
+        <metrics statements="93" coveredstatements="63" conditionals="16" coveredconditionals="4" methods="15" coveredmethods="8"/>
         <line num="2" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
         <line num="8" count="8" type="stmt"/>
         <line num="9" count="8" type="stmt"/>
-        <line num="10" count="8" type="stmt"/>
-        <line num="20" count="8" type="stmt"/>
-        <line num="21" count="7" type="stmt"/>
-        <line num="22" count="7" type="stmt"/>
-        <line num="23" count="7" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="29" count="8" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="43" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="49" count="14" type="stmt"/>
+        <line num="50" count="14" type="stmt"/>
         <line num="51" count="14" type="stmt"/>
-        <line num="52" count="14" type="stmt"/>
-        <line num="53" count="14" type="stmt"/>
-        <line num="55" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="13" type="stmt"/>
+        <line num="55" count="13" type="stmt"/>
         <line num="56" count="13" type="stmt"/>
-        <line num="57" count="13" type="stmt"/>
-        <line num="58" count="13" type="stmt"/>
-        <line num="59" count="13" type="cond" truecount="0" falsecount="1"/>
-        <line num="61" count="13" type="stmt"/>
-        <line num="62" count="13" type="stmt"/>
-        <line num="63" count="13" type="stmt"/>
-        <line num="64" count="13" type="stmt"/>
-        <line num="65" count="13" type="stmt"/>
-        <line num="66" count="13" type="stmt"/>
-        <line num="67" count="13" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="71" count="13" type="stmt"/>
-        <line num="72" count="13" type="stmt"/>
-        <line num="78" count="13" type="stmt"/>
-        <line num="79" count="13" type="stmt"/>
-        <line num="80" count="13" type="stmt"/>
-        <line num="81" count="13" type="stmt"/>
-        <line num="82" count="13" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="88" count="8" type="stmt"/>
-        <line num="89" count="2" type="stmt"/>
-        <line num="90" count="2" type="stmt"/>
-        <line num="91" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="92" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="93" count="2" type="stmt"/>
-        <line num="95" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="96" count="2" type="stmt"/>
-        <line num="97" count="2" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
-        <line num="99" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="101" count="2" type="stmt"/>
-        <line num="102" count="2" type="stmt"/>
-        <line num="103" count="2" type="stmt"/>
-        <line num="104" count="2" type="stmt"/>
-        <line num="105" count="2" type="stmt"/>
-        <line num="106" count="2" type="stmt"/>
-        <line num="107" count="2" type="stmt"/>
-        <line num="109" count="2" type="stmt"/>
-        <line num="111" count="2" type="stmt"/>
-        <line num="112" count="2" type="stmt"/>
-        <line num="113" count="2" type="stmt"/>
-        <line num="114" count="2" type="stmt"/>
-        <line num="115" count="1" type="stmt"/>
-        <line num="117" count="1" type="stmt"/>
-        <line num="121" count="8" type="stmt"/>
-        <line num="122" count="2" type="stmt"/>
-        <line num="123" count="2" type="stmt"/>
-        <line num="124" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="125" count="2" type="stmt"/>
-        <line num="126" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="128" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="132" count="1" type="stmt"/>
-        <line num="134" count="2" type="stmt"/>
-        <line num="135" count="2" type="stmt"/>
-        <line num="136" count="2" type="stmt"/>
-        <line num="138" count="0" type="stmt"/>
-        <line num="142" count="8" type="stmt"/>
-        <line num="143" count="2" type="stmt"/>
-        <line num="144" count="2" type="stmt"/>
-        <line num="145" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="146" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="147" count="2" type="stmt"/>
-        <line num="148" count="2" type="stmt"/>
-        <line num="149" count="2" type="stmt"/>
-        <line num="151" count="1" type="stmt"/>
+        <line num="57" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="59" count="5" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
+        <line num="61" count="5" type="stmt"/>
+        <line num="62" count="5" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="64" count="5" type="stmt"/>
+        <line num="65" count="5" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="69" count="5" type="stmt"/>
+        <line num="70" count="5" type="stmt"/>
+        <line num="76" count="5" type="stmt"/>
+        <line num="77" count="5" type="stmt"/>
+        <line num="78" count="5" type="stmt"/>
+        <line num="79" count="3" type="stmt"/>
+        <line num="80" count="3" type="stmt"/>
+        <line num="82" count="6" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="89" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="90" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="93" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="97" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="119" count="8" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="124" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="140" count="8" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="143" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="144" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="158" count="8" type="cond" truecount="0" falsecount="2"/>
       </file>
       <file name="comments.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\handlers\comments.ts">
-        <metrics statements="52" coveredstatements="43" conditionals="13" coveredconditionals="7" methods="6" coveredmethods="6"/>
+        <metrics statements="52" coveredstatements="26" conditionals="13" coveredconditionals="2" methods="6" coveredmethods="4"/>
         <line num="2" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
         <line num="6" count="8" type="stmt"/>
-        <line num="7" count="5" type="stmt"/>
-        <line num="8" count="5" type="stmt"/>
-        <line num="9" count="5" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="15" count="4" type="stmt"/>
-        <line num="16" count="4" type="stmt"/>
-        <line num="17" count="4" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
         <line num="33" count="8" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
-        <line num="36" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="37" count="3" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="39" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
-        <line num="46" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
-        <line num="53" count="3" type="stmt"/>
-        <line num="54" count="3" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="60" count="8" type="stmt"/>
-        <line num="61" count="3" type="stmt"/>
-        <line num="62" count="3" type="stmt"/>
-        <line num="63" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="65" count="3" type="stmt"/>
-        <line num="66" count="3" type="stmt"/>
-        <line num="68" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="69" count="0" type="stmt"/>
         <line num="70" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="71" count="0" type="stmt"/>
-        <line num="74" count="3" type="stmt"/>
-        <line num="75" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="76" count="2" type="stmt"/>
-        <line num="77" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="78" count="2" type="stmt"/>
-        <line num="81" count="3" type="stmt"/>
-        <line num="82" count="3" type="stmt"/>
-        <line num="83" count="3" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="75" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
       </file>
       <file name="messages.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\handlers\messages.ts">
@@ -304,20 +304,21 @@
       </file>
     </package>
     <package name="src.middleware">
-      <metrics statements="63" coveredstatements="60" conditionals="20" coveredconditionals="13" methods="13" coveredmethods="13"/>
+      <metrics statements="63" coveredstatements="61" conditionals="22" coveredconditionals="15" methods="14" coveredmethods="14"/>
       <file name="error-handler.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\middleware\error-handler.ts">
-        <metrics statements="8" coveredstatements="7" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="9" coveredstatements="9" conditionals="5" coveredconditionals="5" methods="2" coveredmethods="2"/>
         <line num="2" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
-        <line num="5" count="19" type="stmt"/>
-        <line num="6" count="19" type="cond" truecount="0" falsecount="1"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="19" type="cond" truecount="2" falsecount="0"/>
-        <line num="10" count="18" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="5" count="21" type="stmt"/>
+        <line num="6" count="21" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="15" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="21" count="21" type="cond" truecount="2" falsecount="0"/>
       </file>
       <file name="index.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\middleware\index.ts">
-        <metrics statements="28" coveredstatements="26" conditionals="12" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <metrics statements="27" coveredstatements="25" conditionals="12" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
@@ -326,29 +327,28 @@
         <line num="9" count="8" type="stmt"/>
         <line num="11" count="8" type="stmt"/>
         <line num="22" count="8" type="stmt"/>
-        <line num="23" count="29" type="stmt"/>
-        <line num="24" count="29" type="cond" truecount="3" falsecount="1"/>
-        <line num="25" count="29" type="cond" truecount="0" falsecount="1"/>
-        <line num="26" count="29" type="stmt"/>
-        <line num="27" count="29" type="cond" truecount="0" falsecount="1"/>
-        <line num="28" count="29" type="stmt"/>
-        <line num="29" count="29" type="stmt"/>
-        <line num="30" count="29" type="stmt"/>
+        <line num="23" count="24" type="stmt"/>
+        <line num="24" count="24" type="cond" truecount="3" falsecount="1"/>
+        <line num="25" count="24" type="cond" truecount="0" falsecount="1"/>
+        <line num="26" count="24" type="stmt"/>
+        <line num="27" count="24" type="cond" truecount="0" falsecount="1"/>
+        <line num="28" count="24" type="stmt"/>
+        <line num="29" count="24" type="stmt"/>
+        <line num="30" count="24" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="35" count="8" type="stmt"/>
-        <line num="36" count="12" type="stmt"/>
-        <line num="37" count="12" type="cond" truecount="3" falsecount="1"/>
-        <line num="38" count="12" type="stmt"/>
-        <line num="39" count="12" type="cond" truecount="0" falsecount="1"/>
-        <line num="40" count="12" type="stmt"/>
-        <line num="41" count="12" type="cond" truecount="0" falsecount="1"/>
-        <line num="42" count="12" type="stmt"/>
-        <line num="43" count="12" type="stmt"/>
-        <line num="44" count="12" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="38" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="40" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
       </file>
       <file name="validate-request.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\middleware\validate-request.ts">
-        <metrics statements="27" coveredstatements="27" conditionals="5" coveredconditionals="5" methods="10" coveredmethods="10"/>
+        <metrics statements="27" coveredstatements="27" conditionals="5" coveredconditionals="4" methods="10" coveredmethods="10"/>
         <line num="2" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
         <line num="6" count="8" type="stmt"/>
@@ -356,22 +356,22 @@
         <line num="20" count="8" type="stmt"/>
         <line num="26" count="8" type="stmt"/>
         <line num="31" count="8" type="stmt"/>
-        <line num="37" count="37" type="stmt"/>
-        <line num="38" count="37" type="stmt"/>
-        <line num="39" count="37" type="cond" truecount="1" falsecount="0"/>
-        <line num="40" count="33" type="stmt"/>
+        <line num="37" count="35" type="stmt"/>
+        <line num="38" count="35" type="stmt"/>
+        <line num="39" count="35" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="31" type="stmt"/>
         <line num="44" count="8" type="stmt"/>
         <line num="45" count="5" type="stmt"/>
         <line num="46" count="5" type="cond" truecount="1" falsecount="0"/>
         <line num="47" count="4" type="stmt"/>
-        <line num="51" count="18" type="stmt"/>
-        <line num="52" count="18" type="stmt"/>
-        <line num="53" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="54" count="16" type="stmt"/>
+        <line num="51" count="17" type="stmt"/>
+        <line num="52" count="17" type="stmt"/>
+        <line num="53" count="17" type="cond" truecount="1" falsecount="0"/>
+        <line num="54" count="15" type="stmt"/>
         <line num="58" count="8" type="stmt"/>
-        <line num="59" count="6" type="stmt"/>
-        <line num="60" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="61" count="5" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="61" count="2" type="stmt"/>
         <line num="65" count="8" type="stmt"/>
         <line num="66" count="6" type="stmt"/>
         <line num="67" count="6" type="cond" truecount="1" falsecount="0"/>
@@ -379,13 +379,13 @@
       </file>
     </package>
     <package name="src.models">
-      <metrics statements="40" coveredstatements="40" conditionals="1" coveredconditionals="1" methods="6" coveredmethods="6"/>
+      <metrics statements="41" coveredstatements="41" conditionals="1" coveredconditionals="1" methods="6" coveredmethods="6"/>
       <file name="blog.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\models\blog.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="9" type="stmt"/>
         <line num="8" count="9" type="stmt"/>
         <line num="44" count="9" type="stmt"/>
-        <line num="45" count="14" type="stmt"/>
+        <line num="45" count="6" type="stmt"/>
         <line num="47" count="9" type="stmt"/>
         <line num="48" count="9" type="stmt"/>
       </file>
@@ -394,7 +394,7 @@
         <line num="1" count="9" type="stmt"/>
         <line num="8" count="9" type="stmt"/>
         <line num="31" count="9" type="stmt"/>
-        <line num="32" count="5" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
         <line num="34" count="9" type="stmt"/>
         <line num="35" count="9" type="stmt"/>
       </file>
@@ -408,29 +408,30 @@
         <line num="27" count="9" type="stmt"/>
       </file>
       <file name="user.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\models\user.ts">
-        <metrics statements="22" coveredstatements="22" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <metrics statements="23" coveredstatements="23" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="1" count="9" type="stmt"/>
         <line num="2" count="9" type="stmt"/>
         <line num="4" count="9" type="stmt"/>
-        <line num="10" count="9" type="stmt"/>
-        <line num="53" count="9" type="stmt"/>
+        <line num="5" count="9" type="stmt"/>
+        <line num="12" count="9" type="stmt"/>
         <line num="55" count="9" type="stmt"/>
-        <line num="56" count="46" type="stmt"/>
-        <line num="57" count="46" type="cond" truecount="1" falsecount="0"/>
-        <line num="58" count="13" type="stmt"/>
-        <line num="60" count="32" type="stmt"/>
-        <line num="61" count="32" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="69" count="9" type="stmt"/>
-        <line num="70" count="4" type="stmt"/>
-        <line num="71" count="4" type="stmt"/>
-        <line num="72" count="3" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="78" count="9" type="stmt"/>
-        <line num="79" count="9" type="stmt"/>
-        <line num="80" count="34" type="stmt"/>
+        <line num="57" count="9" type="stmt"/>
+        <line num="58" count="34" type="stmt"/>
+        <line num="59" count="34" type="cond" truecount="1" falsecount="0"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="62" count="30" type="stmt"/>
+        <line num="63" count="30" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="71" count="9" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="73" count="4" type="stmt"/>
+        <line num="74" count="3" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="80" count="9" type="stmt"/>
+        <line num="81" count="32" type="stmt"/>
         <line num="83" count="9" type="stmt"/>
         <line num="84" count="9" type="stmt"/>
+        <line num="85" count="9" type="stmt"/>
       </file>
     </package>
     <package name="src.routes.admin">
@@ -441,14 +442,14 @@
         <line num="2" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
-        <line num="8" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="19" count="8" type="stmt"/>
+        <line num="11" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
       </file>
       <file name="blogs.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\routes\admin\blogs.ts">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -488,9 +489,9 @@
       </file>
     </package>
     <package name="src.routes.public">
-      <metrics statements="45" coveredstatements="45" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+      <metrics statements="45" coveredstatements="44" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
       <file name="auth.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\routes\public\auth.ts">
-        <metrics statements="33" coveredstatements="33" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <metrics statements="33" coveredstatements="32" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="1" count="8" type="stmt"/>
         <line num="2" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
@@ -501,16 +502,16 @@
         <line num="9" count="8" type="stmt"/>
         <line num="11" count="8" type="stmt"/>
         <line num="13" count="8" type="stmt"/>
-        <line num="14" count="33" type="stmt"/>
-        <line num="15" count="33" type="stmt"/>
-        <line num="16" count="33" type="stmt"/>
-        <line num="22" count="33" type="stmt"/>
-        <line num="23" count="32" type="stmt"/>
-        <line num="24" count="32" type="stmt"/>
-        <line num="25" count="32" type="cond" truecount="1" falsecount="0"/>
-        <line num="26" count="32" type="stmt"/>
-        <line num="37" count="32" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
+        <line num="14" count="31" type="stmt"/>
+        <line num="15" count="31" type="stmt"/>
+        <line num="16" count="31" type="stmt"/>
+        <line num="22" count="31" type="stmt"/>
+        <line num="23" count="30" type="stmt"/>
+        <line num="24" count="30" type="stmt"/>
+        <line num="25" count="30" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="30" type="stmt"/>
+        <line num="37" count="30" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
         <line num="43" count="8" type="stmt"/>
         <line num="44" count="4" type="stmt"/>
         <line num="45" count="4" type="stmt"/>
@@ -553,13 +554,13 @@
         <line num="4" count="8" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
         <line num="7" count="8" type="stmt"/>
-        <line num="12" count="15" type="stmt"/>
+        <line num="12" count="14" type="stmt"/>
       </file>
       <file name="data-uri.ts" path="C:\Users\kanuma\Desktop\andela\projects\html_css\mybrand-api-ts\src\services\data-uri.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="8" type="stmt"/>
         <line num="2" count="8" type="stmt"/>
-        <line num="4" count="15" type="stmt"/>
+        <line num="4" count="14" type="stmt"/>
       </file>
     </package>
   </project>
