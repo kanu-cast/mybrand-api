@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import uniqueValidator from 'mongoose-unique-validator';
 import { UserAttrs, UserDoc } from "./interfaces/user";
 import bcrypt from 'bcrypt';
+import { BadRequestError } from "../errors/bad-request-error";
+import { NextFunction } from "express";
 
 interface UserModel extends mongoose.Model<UserDoc> {
     build(attrs: UserAttrs): UserDoc;
@@ -63,10 +65,8 @@ export async function userPreSaveFunction (this: any, next){
         return next(err);
     }
 }
-
-
 // Schema methods
-export const compareFunction = userSchema.methods.comparePassword = async function(candidatePassword, next) {
+export const compareFunction = userSchema.methods.comparePassword = async function(candidatePassword, next:NextFunction) {
     try {
       let isMatch = await bcrypt.compare(candidatePassword, this.password);
       return isMatch;
@@ -75,10 +75,9 @@ export const compareFunction = userSchema.methods.comparePassword = async functi
     }
 };
 
-userSchema.plugin(uniqueValidator,{message:"Email is already registered under another user"});
 export const userBuildFunction = userSchema.statics.build = (attrs: UserAttrs)=>{
     return new User(attrs);
 };
-
+userSchema.plugin(uniqueValidator,{message: 'Email registered under another User'});
 const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 export { User };

@@ -20,8 +20,8 @@ router.post('/signup', validateSignup,
             email:req.body.email,
         });
         await newUser.save();
-        const createdUser:UserDoc = await User.findById(newUser._id).select('-password');
-        const { id, email, firstName, lastName, role } = createdUser;
+        const createdUser = await User.findById(newUser._id).select('-password');
+        const { id, email, firstName, lastName, role } = createdUser as UserDoc;
         if(createdUser){
             let token = jwt.sign(
                 {

@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { Blog } from "../models/blog";
 import { Comment } from "../models/comment";
 import { NotFoundError } from '../errors/not-found-error';
+import { ObjectId } from "mongodb";
 
 export const handleCreateComment = async(req:Request, res:Response, next:NextFunction)=>{
     try{
@@ -10,10 +11,10 @@ export const handleCreateComment = async(req:Request, res:Response, next:NextFun
         const newComment = Comment.build({
             author: req.userId!,
             body: req.body.body,
-            blog: foundBlog._id
+            blog: foundBlog._id as ObjectId
         });
         await newComment.save();
-        foundBlog.comments.push(newComment._id);
+        foundBlog.comments.push(newComment._id as ObjectId);
         await foundBlog.save();
         const updatedBlog = await Blog.findById(foundBlog._id)
         .populate({

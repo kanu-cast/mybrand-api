@@ -1,13 +1,13 @@
-import express, { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Blog } from '../models/blog';
 import { uploadFiles } from '../services/cloudinary';
 import { User } from '../models/user';
 import { dataUri } from '../services/data-uri';
 
-import { BadRequestError} from '../errors/bad-request-error';
 import { NotFoundError } from '../errors/not-found-error';
 import { NotAuthorizedError } from '../errors/not-authorized-error';
 import { RequestValidationError } from '../errors/request-validation-error';
+import { ObjectId } from 'mongodb';
 interface Image {
     url: string;
     public_id: string;
@@ -28,7 +28,6 @@ export const handleFetchAllBlogs = async(req:Request, res:Response, next:NextFun
 
 export const handleFetchSingleBlog = async(req:Request, res:Response, next:NextFunction)=>{
     try{
-        console.log('fetching single blog');
         const filter = { _id: req.params.blog_id, deleted:false};
         const blog = await Blog.find(filter)
         .populate('author','firstName lastName')
@@ -77,7 +76,7 @@ export const handleCreateBlog = async(req:Request, res:Response, next:NextFuncti
         });
         await newBlog.save();
         const user = await User.findById(req.userId);
-        user!.blogs.push(newBlog._id);
+        user!.blogs.push(newBlog._id as ObjectId);
         await user!.save();
         return res.status(201).json({ status:201, blog:newBlog, msg:'Blog created succesfully' });
     }catch(err){
