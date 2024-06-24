@@ -68,12 +68,14 @@ export const handleCreateBlog = async(req:Request, res:Response, next:NextFuncti
             return next(new RequestValidationError('Please add Image for Blog'));
         }
         const { title, body} = req.body;
+        //creating new blog
         const newBlog = Blog.build({
            title,
            body,
            author: req.userId!,
            imageObj:blogImage
         });
+        //saving new blog
         await newBlog.save();
         const user = await User.findById(req.userId);
         user!.blogs.push(newBlog._id as ObjectId);
